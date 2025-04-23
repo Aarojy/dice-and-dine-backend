@@ -25,10 +25,6 @@ const deleteUser = async (userId) => {
   try {
     await connection.beginTransaction();
 
-    // Delete all cats owned by the user
-    await connection.query('DELETE FROM wsk_cats WHERE owner = ?', [userId]);
-
-    // Delete the user
     const [result] = await connection.query(
       'DELETE FROM wsk_users WHERE user_id = ?',
       [userId]
@@ -54,25 +50,4 @@ const login = async (user) => {
   return rows[0];
 };
 
-const postFavorite = async (username, favorite) => {
-  console.log('postFavorite', username, favorite);
-  const sql = `UPDATE users_wsk SET favorite = ? WHERE username = ?`;
-  const [result] = await promisePool.execute(sql, [favorite, username]);
-  return result;
-};
-
-const getFavorite = async (username) => {
-  const sql = `SELECT favorite FROM users_wsk WHERE username = ?`;
-  const [rows] = await promisePool.execute(sql, [username]);
-  return rows.length > 0 ? rows[0].favorite : null;
-};
-
-export {
-  listUsers,
-  findUserById,
-  addUser,
-  deleteUser,
-  login,
-  postFavorite,
-  getFavorite,
-};
+export {listUsers, findUserById, addUser, deleteUser, login};

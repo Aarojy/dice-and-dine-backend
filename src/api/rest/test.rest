@@ -83,16 +83,3 @@ Content-Type: image/jpeg
 
 < ../../../public/150.jpg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
-### Add a favorite for a user
-POST http://localhost:3000/api/v1/users/favorite/12345
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEyMzQ1IiwiaWF0IjoxNzQ1MTQ0OTYyLCJleHAiOjE3NDUyMzEzNjJ9.HfYwulX-Ek7Y4J7U-Tb4gZeaakVdOeae50e2SzyaWLI
-
-{
-  "favorite": "möl"
-}
-
-### Get favorite for a user
-GET http://localhost:3000/api/v1/users/favorite/12345
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbmVkb2UiLCJpYXQiOjE3NDUwOTU3NDYsImV4cCI6MTc0NTE4MjE0Nn0.CCfV57XWFkQUMUKITlWEhZKfbUdJyCPAF1JUmLR1OY4
