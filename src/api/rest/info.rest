@@ -1,2 +1,18 @@
-#Fetch menu info
+### Fetch menu info
 GET http://localhost:3000/api/v1/info/menu/fi
+
+### Fetch allergen info
+GET http://localhost:3000/api/v1/info/allergens/fi
+
+### Fetch restaurant info
+GET http://localhost:3000/api/v1/info/restaurant/fi
+
+### Fetch game info
+GET http://localhost:3000/api/v1/info/boardgames/fi
+
+### Fetch food category info
+GET http://localhost:3000/api/v1/info/itemcategories/fi
+
+### Fetch game category info
+GET http://localhost:3000/api/v1/info/gamecategories/fi
+

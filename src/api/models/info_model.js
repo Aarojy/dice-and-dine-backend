@@ -6,7 +6,8 @@ const restaurant = 'restaurant_info';
 const boardgames = 'boardgames';
 const itemCategories = 'item_categories';
 const itemCategoriesTable = 'category_table';
-const gameCategories = 'game_category_table';
+const gameCategories = 'game_categories';
+const gameCategoriesTable = 'game_category_table';
 
 const getMenuFromDatabase = async (lang) => {
   let result = [];
@@ -40,7 +41,6 @@ const getMenuFromDatabase = async (lang) => {
     const categoryRows = await promisePool.query(
       `SELECT * FROM ${itemCategoriesTable} WHERE menu_item_id=${row.id}`
     );
-    console.log(categoryRows);
 
     let categoriesList = [];
     for (const category_id of categoryRows[0]) {
@@ -72,9 +72,31 @@ const getRestaurantFromDatabase = async (lang) => {
 };
 
 const getBoardgamesFromDatabase = async (lang) => {
+  let result = [];
+
   const [rows] = await promisePool.query(
     `SELECT * FROM ${boardgames} WHERE lang="${lang}"`
   );
+
+  // Fetch all categories for each game
+  for (const row of rows) {
+    const categoryRows = await promisePool.query(
+      `SELECT * FROM ${gameCategoriesTable} WHERE game_id=${row.id}`
+    );
+
+    let categoriesList = [];
+    for (const category_id of categoryRows[0]) {
+      let category = await promisePool.query(
+        `SELECT * FROM ${gameCategories} WHERE id=${category_id.game_category_id}`
+      );
+
+      categoriesList.push(category[0][0].name);
+    }
+
+    row.categories = categoriesList;
+    result.push(row);
+  }
+
   return rows;
 };
 
