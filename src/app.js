@@ -10,7 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my REST API!');
+  8;
+  res.send('Welcome to REST API!');
 });
 
 app.use('/api/v1', api);

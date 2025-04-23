@@ -8,7 +8,7 @@ const listUsers = async () => {
 
 const findUserById = async (id) => {
   const [rows] = await promisePool.query(
-    `SELECT * FROM ${userTable} WHERE user_id = ?`,
+    `SELECT * FROM ${userTable} WHERE id = ?`,
     [id]
   );
   return rows.length > 0 ? rows[0] : null;
@@ -16,7 +16,7 @@ const findUserById = async (id) => {
 
 const addUser = async (user) => {
   const {username, password, email, user_type} = user;
-  const sql = `INSERT INTO ${userTable} (username, password, email, user_type) VALUES (?, ?, ?, ?)`;
+  const sql = `INSERT INTO ${userTable} (name, password, email, user_type) VALUES (?, ?, ?, ?)`;
   const [result] = await promisePool.execute(sql, [
     username,
     password,
@@ -32,7 +32,7 @@ const deleteUser = async (userId) => {
     await connection.beginTransaction();
 
     const [result] = await connection.query(
-      `DELETE FROM ${userTable} WHERE user_id = ?`,
+      `DELETE FROM ${userTable} WHERE id = ?`,
       [userId]
     );
 
@@ -47,7 +47,7 @@ const deleteUser = async (userId) => {
 };
 
 const login = async (user) => {
-  const sql = `SELECT * FROM ${userTable} WHERE username = ?`;
+  const sql = `SELECT * FROM ${userTable} WHERE name = ?`;
 
   const [rows] = await promisePool.execute(sql, [user]);
   if (rows.length === 0) {
