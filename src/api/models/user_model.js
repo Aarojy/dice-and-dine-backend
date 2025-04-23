@@ -1,22 +1,28 @@
 import promisePool from '../../utils/database.js';
+const userTable = 'registered_customers';
 
 const listUsers = async () => {
-  const [rows] = await promisePool.query('SELECT * FROM users_wsk');
+  const [rows] = await promisePool.query(`SELECT * FROM ${userTable}`);
   return rows;
 };
 
 const findUserById = async (id) => {
   const [rows] = await promisePool.query(
-    'SELECT * FROM users_wsk WHERE user_id = ?',
+    `SELECT * FROM ${userTable} WHERE user_id = ?`,
     [id]
   );
   return rows.length > 0 ? rows[0] : null;
 };
 
 const addUser = async (user) => {
-  const {username, password} = user;
-  const sql = `INSERT INTO users_wsk (username, password) VALUES (?, ?)`;
-  const [result] = await promisePool.execute(sql, [username, password]);
+  const {username, password, email, user_type} = user;
+  const sql = `INSERT INTO ${userTable} (username, password, email, user_type) VALUES (?, ?, ?, ?)`;
+  const [result] = await promisePool.execute(sql, [
+    username,
+    password,
+    email,
+    user_type,
+  ]);
   return {user_id: result.insertId};
 };
 
@@ -26,7 +32,7 @@ const deleteUser = async (userId) => {
     await connection.beginTransaction();
 
     const [result] = await connection.query(
-      'DELETE FROM wsk_users WHERE user_id = ?',
+      `DELETE FROM ${userTable} WHERE user_id = ?`,
       [userId]
     );
 
@@ -41,7 +47,7 @@ const deleteUser = async (userId) => {
 };
 
 const login = async (user) => {
-  const sql = `SELECT * FROM users_wsk WHERE username = ?`;
+  const sql = `SELECT * FROM ${userTable} WHERE username = ?`;
 
   const [rows] = await promisePool.execute(sql, [user]);
   if (rows.length === 0) {

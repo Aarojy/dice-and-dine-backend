@@ -16,7 +16,7 @@ const authUser = async (req, res) => {
   const passwordValid = bcrypt.compareSync(req.body.password, result.password);
 
   if (!passwordValid) {
-    //res.sendStatus(401);
+    res.sendStatus(401);
     return;
   }
 

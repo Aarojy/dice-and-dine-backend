@@ -3,10 +3,15 @@ import bcrypt from 'bcrypt';
 
 const postUser = async (req, res) => {
   try {
-    const {username, password} = req;
+    let {username, password, email, user_type} = req;
+
+    // if user_type is not provided, default to 'customer'
+    if (!user_type) {
+      user_type = 'customer';
+    }
 
     // Validate required fields
-    if (!username || !password) {
+    if (!username || !password || !email || !user_type) {
       return res.status(400).json({error: 'Missing required fields'});
     }
 
@@ -18,6 +23,8 @@ const postUser = async (req, res) => {
     const result = await addUser({
       username,
       password: hashedPassword,
+      email,
+      user_type,
     });
 
     if (result.user_id) {
