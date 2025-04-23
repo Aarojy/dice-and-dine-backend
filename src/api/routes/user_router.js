@@ -8,10 +8,12 @@ import {authenticateToken} from '../../middlewares.js';
 const userRouter = express.Router();
 
 const validateUser = (req, res, next) => {
-  getMe(req, res, next);
-  if (!res.locals.user) {
-    return res.status(401).json({error: 'Unauthorized'});
+  const usernameFromRequest = req.params.username;
+
+  if (res.decoded.username !== usernameFromRequest) {
+    return res.status(403).send({message: 'invalid token'});
   }
+
   next();
 };
 
