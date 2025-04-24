@@ -1,0 +1,19 @@
+### Fetch all orders
+GET http://localhost:3000/api/v1/orders
+
+### Fetch specific order ny id
+GET http://localhost:3000/api/v1/orders/1
+
+### Create a new order
+POST http://localhost:3000/api/v1/orders
+Content-Type: application/json
+
+{
+  "customer_id": 1,
+  "order": [
+    {"item_id": 3,
+    "quantity": 3},
+    {"item_id": 5,
+    "quantity": 8}
+  ]
+}
