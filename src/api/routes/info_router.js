@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getMenu,
+  getMenuItem,
   getRestaurant,
   getAllergens,
   getBoardgames,
@@ -11,6 +12,8 @@ import {
 const infoRouter = express.Router();
 
 infoRouter.route('/menu/:lang').get(getMenu);
+
+infoRouter.route('/menu/item/:id').get(getMenuItem);
 
 infoRouter.route('/allergens/:lang').get(getAllergens);
 

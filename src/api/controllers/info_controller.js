@@ -1,5 +1,6 @@
 import {
   getMenuFromDatabase,
+  getMenuItemFromDatabase,
   getAllergensFromDatabase,
   getRestaurantFromDatabase,
   getBoardgamesFromDatabase,
@@ -10,8 +11,20 @@ import {
 /* eslint-disable no-unused-vars */
 const getMenu = async (req, res) => {
   try {
-    const menu = await getMenuFromDatabase(req.params.lang); // Replace with actual database call
+    const menu = await getMenuFromDatabase(req.params.lang);
     res.status(200).json(menu);
+  } catch (error) {
+    res.status(500).json({error: 'Internal server error'});
+  }
+};
+
+const getMenuItem = async (req, res) => {
+  try {
+    const menuItem = await getMenuItemFromDatabase(req.params.id);
+    if (!menuItem) {
+      return res.status(404).json({error: 'Menu item not found'});
+    }
+    res.status(200).json(menuItem);
   } catch (error) {
     res.status(500).json({error: 'Internal server error'});
   }
@@ -61,6 +74,7 @@ const getGameCategories = async (req, res) => {
 
 export {
   getMenu,
+  getMenuItem,
   getAllergens,
   getRestaurant,
   getBoardgames,

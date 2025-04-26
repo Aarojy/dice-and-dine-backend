@@ -17,6 +17,18 @@ const listOrders = async () => {
       ({id, order_id, ...rest}) => rest
     );
     row.order = filteredOrderItems;
+
+    for (const item of row.order) {
+      const menuItem = await promisePool.query(
+        'SELECT * FROM menu WHERE id = ?',
+        [item.menu_item_id]
+      );
+      item.menu_item = menuItem[0][0];
+    }
+    // eslint-disable-next-line no-unused-vars
+    ({menu_item_id, ...rest}) => rest;
+
+    row.order = filteredOrderItems;
   }
 
   return rows;
@@ -27,6 +39,34 @@ const orderById = async (id) => {
     'SELECT * FROM food_orders WHERE id = ?',
     [id]
   );
+
+  const user = await findUserById(rows[0].customer);
+
+  // eslint-disable-next-line no-unused-vars
+  const {password, user_type, ...userWithoutPassword} = user;
+
+  rows[0].customer = userWithoutPassword;
+
+  const orderItems = await subOrderById(rows[0].order);
+  const filteredOrderItems = orderItems.map(
+    // eslint-disable-next-line no-unused-vars
+    ({id, order_id, ...rest}) => rest
+  );
+
+  rows[0].order = filteredOrderItems;
+
+  for (const item of rows[0].order) {
+    const menuItem = await promisePool.query(
+      'SELECT * FROM menu WHERE id = ?',
+      [item.menu_item_id]
+    );
+    item.menu_item = menuItem[0][0];
+  }
+  // eslint-disable-next-line no-unused-vars
+  ({menu_item_id, ...rest}) => rest;
+
+  rows[0].order = filteredOrderItems;
+
   return rows[0];
 };
 

@@ -57,6 +57,52 @@ const getMenuFromDatabase = async (lang) => {
   return result;
 };
 
+const getMenuItemFromDatabase = async (id) => {
+  const [rows] = await promisePool.query(
+    `SELECT * FROM ${menu} WHERE id=${id}`
+  );
+
+  if (rows.length === 0) {
+    return null;
+  }
+
+  const row = rows[0];
+
+  // Fetch allergens for the menu item
+  const allergenRows = await promisePool.query(
+    `SELECT * FROM ${allergenTable} WHERE menu_item_id=${row.id}`
+  );
+
+  let allergensList = [];
+  for (const allergen_id of allergenRows[0]) {
+    let allergen = await promisePool.query(
+      `SELECT * FROM ${allergens} WHERE id=${allergen_id.allergen_id}`
+    );
+
+    allergensList.push(allergen[0][0].name);
+  }
+
+  row.allergens = allergensList;
+
+  // Fetch categories for the menu item
+  const categoryRows = await promisePool.query(
+    `SELECT * FROM ${itemCategoriesTable} WHERE menu_item_id=${row.id}`
+  );
+
+  let categoriesList = [];
+  for (const category_id of categoryRows[0]) {
+    let category = await promisePool.query(
+      `SELECT * FROM ${itemCategories} WHERE id=${category_id.category_id}`
+    );
+
+    categoriesList.push(category[0][0].name);
+  }
+
+  row.categories = categoriesList;
+
+  return row;
+};
+
 const getAllergensFromDatabase = async (lang) => {
   const [rows] = await promisePool.query(
     `SELECT * FROM ${allergens} WHERE lang="${lang}"`
@@ -116,6 +162,7 @@ const getGameCategoriesFromDatabase = async (lang) => {
 
 export {
   getMenuFromDatabase,
+  getMenuItemFromDatabase,
   getAllergensFromDatabase,
   getRestaurantFromDatabase,
   getBoardgamesFromDatabase,
