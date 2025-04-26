@@ -5,11 +5,12 @@ GET http://localhost:3000/api/v1/orders
 GET http://localhost:3000/api/v1/orders/5
 
 ### Create a new order
-POST http://localhost:3000/api/v1/orders
+POST http://localhost:3000/api/v1/orders/bobdoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbmVkb2UiLCJpYXQiOjE3NDU2NTk3NTksImV4cCI6MTc0NTc0NjE1OX0.Iu5Oo8ovBcYS97QWeJYwrVkRqLYvTRuh8ybyytBdvTg
 Content-Type: application/json
 
 {
-  "customer_id": 2,
+  "customer_id": 1,
   "order": [
     {"item_id": 6,
     "quantity": 1},
