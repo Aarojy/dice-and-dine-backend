@@ -2,17 +2,17 @@
 import express from 'express';
 import {postUser} from '../controllers/user_controller.js';
 import {upload} from '../../utils/multer.js';
-import {getMe} from '../controllers/auth_controller.js';
 import {authenticateToken} from '../../middlewares.js';
-import {postFavorite, getFavorite} from '../models/user_model.js';
 
 const userRouter = express.Router();
 
 const validateUser = (req, res, next) => {
-  getMe(req, res, next);
-  if (!res.locals.user) {
-    return res.status(401).json({error: 'Unauthorized'});
+  const usernameFromRequest = req.params.username;
+
+  if (res.decoded.username !== usernameFromRequest) {
+    return res.status(403).send({message: 'invalid token'});
   }
+
   next();
 };
 

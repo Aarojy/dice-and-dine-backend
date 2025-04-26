@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import {login} from '../models/user_model.js';
 
 const getMe = async (req, res) => {
-  if (res.locals.user) {
+  if (res.decoded.username) {
     res.json({message: 'token ok', user: res.locals.user});
   } else {
     res.sendStatus(401);
@@ -12,11 +12,15 @@ const getMe = async (req, res) => {
 
 const authUser = async (req, res) => {
   const result = await login(req.body.username);
+  if (!result) {
+    res.sendStatus(401);
+    return;
+  }
 
   const passwordValid = bcrypt.compareSync(req.body.password, result.password);
 
   if (!passwordValid) {
-    //res.sendStatus(401);
+    res.sendStatus(401);
     return;
   }
 
@@ -28,7 +32,7 @@ const authUser = async (req, res) => {
     expiresIn: '24h',
   });
 
-  res.json({userWithNoPassword, token, result});
+  res.json({userWithNoPassword, token});
 };
 
 export {authUser, getMe};
