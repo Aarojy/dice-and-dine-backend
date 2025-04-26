@@ -1,3 +1,5 @@
+import {authenticateToken} from '../../middlewares.js';
+import {validateUser} from '../routes/user_router.js';
 import express from 'express';
 import {
   getOrders,
@@ -11,6 +13,8 @@ orderRouter.route('/').get(getOrders);
 
 orderRouter.route('/:id').get(getOrderById);
 
-orderRouter.route('/').post(postOrder);
+orderRouter
+  .route('/:username')
+  .post(authenticateToken, validateUser, postOrder);
 
 export default orderRouter;

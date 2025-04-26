@@ -6,7 +6,7 @@ import {authenticateToken} from '../../middlewares.js';
 
 const userRouter = express.Router();
 
-const validateUser = (req, res, next) => {
+export const validateUser = (req, res, next) => {
   const usernameFromRequest = req.params.username;
 
   if (res.decoded.username !== usernameFromRequest) {
