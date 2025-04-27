@@ -4,7 +4,7 @@ const menuItems = [
   {
     name: 'Mini Mozzarella Bites',
     price: 5.0,
-    category: 1,
+    category: 6,
     allergens: ['1', '3'],
     description: 'Deep-fried mozzarella balls served with marinara dip',
     lang: 'en',
@@ -12,7 +12,7 @@ const menuItems = [
   {
     name: 'Tomato Soup Shot',
     price: 3.5,
-    category: 1,
+    category: 6,
     allergens: ['3'],
     description:
       'A rich and creamy tomato soup in a small game-friendly portion',
@@ -21,7 +21,7 @@ const menuItems = [
   {
     name: 'Boardwalk Bites Sampler',
     price: 6.9,
-    category: 1,
+    category: 6,
     allergens: ['1', '2', '3'],
     description:
       'A mix of mini starters: fries, cheese sticks, and onion rings',
@@ -30,7 +30,7 @@ const menuItems = [
   {
     name: 'Classic Cheeseburger',
     price: 12.9,
-    category: 2,
+    category: 7,
     allergens: ['1', '2', '3'],
     description:
       'Juicy beef patty, cheddar cheese, house sauce in a toasted bun',
@@ -39,7 +39,7 @@ const menuItems = [
   {
     name: 'Vegan Stack Burger',
     price: 11.5,
-    category: 2,
+    category: 7,
     allergens: ['1'],
     description:
       'Plant-based patty, grilled veggies, vegan mayo, whole grain bun',
@@ -48,7 +48,7 @@ const menuItems = [
   {
     name: 'Spicy Fish Tacos',
     price: 10.5,
-    category: 2,
+    category: 7,
     allergens: ['1', '2', '3', '6'],
     description: 'Fried fish, slaw, and spicy mayo in soft taco shells',
     lang: 'en',
@@ -56,7 +56,7 @@ const menuItems = [
   {
     name: 'Seafood Mac & Cheese',
     price: 11.9,
-    category: 2,
+    category: 7,
     allergens: ['1', '3', '5'],
     description: 'Creamy mac and cheese with shrimp and squid',
     lang: 'en',
@@ -64,7 +64,7 @@ const menuItems = [
   {
     name: 'Meeple Mega Burger',
     price: 13.5,
-    category: 2,
+    category: 7,
     allergens: ['1', '2', '3'],
     description:
       'Double beef patties, double cheese, and onion rings in a stacker bun',
@@ -73,7 +73,7 @@ const menuItems = [
   {
     name: 'Critical Hit Chicken Wrap',
     price: 9.9,
-    category: 2,
+    category: 7,
     allergens: ['1', '2'],
     description: 'Grilled chicken, spicy mayo, salad in a soft tortilla wrap',
     lang: 'en',
@@ -81,7 +81,7 @@ const menuItems = [
   {
     name: 'Sweet Dice Brownie',
     price: 4.5,
-    category: 3,
+    category: 8,
     allergens: ['1', '2', '3', '4'],
     description: 'Rich chocolate brownie with nut topping and vanilla sauce',
     lang: 'en',
@@ -89,7 +89,7 @@ const menuItems = [
   {
     name: 'Dice Tower Donuts',
     price: 4.2,
-    category: 3,
+    category: 8,
     allergens: ['1', '2', '3'],
     description:
       'Mini stacked donuts with chocolate drizzle and colorful sprinkles',
@@ -98,7 +98,7 @@ const menuItems = [
   {
     name: 'Victory Cupcake Duo',
     price: 4.5,
-    category: 3,
+    category: 8,
     allergens: ['1', '2', '3'],
     description: 'Two colorful cupcakes—chocolate and vanilla',
     lang: 'en',
@@ -106,7 +106,7 @@ const menuItems = [
   {
     name: 'Hex Tile Apple Pie',
     price: 4.9,
-    category: 3,
+    category: 8,
     allergens: ['1', '2', '3'],
     description: 'Mini apple pie with a hex-pattern crust',
     lang: 'en',
@@ -114,7 +114,7 @@ const menuItems = [
   {
     name: 'Game Night Milkshake',
     price: 5.0,
-    category: 4,
+    category: 9,
     allergens: ['3'],
     description: 'Thick vanilla shake topped with whipped cream',
     lang: 'en',
@@ -122,7 +122,7 @@ const menuItems = [
   {
     name: 'Pepsi (0.33L)',
     price: 2.8,
-    category: 4,
+    category: 9,
     allergens: [],
     description: 'Pepsi (0.33L)',
     lang: 'en',
@@ -130,7 +130,7 @@ const menuItems = [
   {
     name: '7 up (0.33L)',
     price: 2.8,
-    category: 4,
+    category: 9,
     allergens: [],
     description: '7 up (0.33L)',
     lang: 'en',
@@ -138,7 +138,7 @@ const menuItems = [
   {
     name: 'Fanta (0.33L)',
     price: 2.8,
-    category: 4,
+    category: 9,
     allergens: [],
     description: 'Fanta (0.33L)',
     lang: 'en',
@@ -146,7 +146,7 @@ const menuItems = [
   {
     name: 'Local Craft Beer (0.5L)',
     price: 6.5,
-    category: 4,
+    category: 9,
     allergens: ['1'],
     description: 'Rotating selection of local craft beer, ask your server',
     lang: 'en',
@@ -154,7 +154,7 @@ const menuItems = [
   {
     name: 'Long Drink',
     price: 6.5,
-    category: 4,
+    category: 9,
     allergens: [],
     description: '',
     lang: 'en',
@@ -162,7 +162,7 @@ const menuItems = [
   {
     name: 'Apple Juice (0.33L)',
     price: 2.0,
-    category: 4,
+    category: 9,
     allergens: [],
     description: 'Cold-pressed apple juice',
     lang: 'en',
@@ -170,7 +170,7 @@ const menuItems = [
   {
     name: 'Mana Potion Smoothie',
     price: 4.8,
-    category: 4,
+    category: 9,
     allergens: ['3'],
     description: 'Blueberry-banana yogurt smoothie to recharge your energy',
     lang: 'en',
@@ -178,7 +178,7 @@ const menuItems = [
   {
     name: 'Potion of Refreshment (Iced Tea)',
     price: 3.2,
-    category: 4,
+    category: 9,
     allergens: [],
     description: 'Magically chilled citrus iced tea',
     lang: 'en',
@@ -186,7 +186,7 @@ const menuItems = [
   {
     name: 'Potion of Power',
     price: 3.5,
-    category: 4,
+    category: 9,
     allergens: [],
     description:
       'A boost of energy with a refreshing citrus flavor to keep you alert during game night',
@@ -195,7 +195,7 @@ const menuItems = [
   {
     name: "Wizard's Brew (Coffee)",
     price: 3.0,
-    category: 4,
+    category: 9,
     allergens: [],
     description:
       'A strong and bold hot coffee to keep your mind sharp and your game strong.',
@@ -204,7 +204,7 @@ const menuItems = [
   {
     name: 'Chicken Nuggets & Dip',
     price: 8.9,
-    category: 5,
+    category: 10,
     allergens: ['1', '2'],
     description: 'Crispy chicken bites with garlic mayo and BBQ dip',
     lang: 'en',
@@ -212,7 +212,7 @@ const menuItems = [
   {
     name: 'Board Game Fries',
     price: 4.9,
-    category: 5,
+    category: 10,
     allergens: ['3'],
     description: 'Skin-on fries with melted cheese and herbs',
     lang: 'en',
@@ -220,7 +220,7 @@ const menuItems = [
   {
     name: 'Nuts for Nachos',
     price: 7.9,
-    category: 5,
+    category: 10,
     allergens: ['1', '3', '4'],
     description: 'Cheesy nachos with jalapeños and nut crumble',
     lang: 'en',
@@ -228,7 +228,7 @@ const menuItems = [
   {
     name: 'Critical Crunch Mix',
     price: 3.5,
-    category: 5,
+    category: 10,
     allergens: ['4'],
     description: 'Sweet and salty snack mix with nuts and candy dice',
     lang: 'en',
@@ -236,7 +236,7 @@ const menuItems = [
   {
     name: 'Token Trail Mix',
     price: 3.9,
-    category: 5,
+    category: 10,
     allergens: ['4'],
     description: 'Nutty trail mix with chocolate chips and dried fruit',
     lang: 'en',
@@ -244,7 +244,7 @@ const menuItems = [
   {
     name: 'Dicey Popcorn',
     price: 3.0,
-    category: 5,
+    category: 10,
     allergens: [],
     description: 'Buttery popcorn with a sprinkle of cheese seasoning',
     lang: 'en',
@@ -522,7 +522,6 @@ const menuItems = [
     lang: 'fi',
   },
 ];
-
 async function seedMenuItems() {
   const connection = await promisePool.getConnection();
 
