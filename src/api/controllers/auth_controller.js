@@ -4,7 +4,7 @@ import {login} from '../models/user_model.js';
 
 const getMe = async (req, res) => {
   if (res.decoded.username) {
-    res.json({message: 'token ok', user: res.locals.user});
+    res.json({message: 'token ok', user: res.decoded.username});
   } else {
     res.sendStatus(401);
   }
