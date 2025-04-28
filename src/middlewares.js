@@ -8,9 +8,12 @@ const authenticateToken = (req, res, next) => {
     return res.sendStatus(401);
   }
   try {
-    res.decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = {
+      id: decoded.id,
+    };
     next();
+
     // eslint-disable-next-line no-unused-vars
   } catch (err) {
     res.status(403).send({message: 'invalid token'});
