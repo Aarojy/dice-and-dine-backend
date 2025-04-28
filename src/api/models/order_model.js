@@ -36,10 +36,9 @@ const listOrders = async () => {
 
 const orderById = async (id) => {
   const [rows] = await promisePool.query(
-    'SELECT * FROM food_orders WHERE id = ?',
+    'SELECT * FROM food_orders WHERE `order` = ?',
     [id]
   );
-
   const user = await findUserById(rows[0].customer);
 
   // eslint-disable-next-line no-unused-vars
