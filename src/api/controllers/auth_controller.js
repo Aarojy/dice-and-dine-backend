@@ -3,10 +3,10 @@ import jwt from 'jsonwebtoken';
 import {login} from '../models/user_model.js';
 
 const getMe = async (req, res) => {
-  if (res.decoded.username) {
-    res.json({message: 'token ok', user: res.decoded.username});
+  if (req.user) {
+    res.json({message: 'token ok', user: req.user});
   } else {
-    res.sendStatus(401);
+    res.sendStatus(401); // Unauthorized if no valid decoded data
   }
 };
 
@@ -25,7 +25,7 @@ const authUser = async (req, res) => {
   }
 
   const userWithNoPassword = {
-    username: result.name,
+    id: result.id,
   };
 
   const token = jwt.sign(userWithNoPassword, process.env.JWT_SECRET, {
