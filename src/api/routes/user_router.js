@@ -9,8 +9,12 @@ const userRouter = express.Router();
 export const validateUser = (req, res, next) => {
   const usernameFromRequest = req.params.username;
 
-  if (res.decoded.username !== usernameFromRequest) {
-    return res.status(403).send({message: 'invalid token'});
+  if (!req.user || !req.user.username) {
+    return res.status(403).send({message: 'Invalid user data'});
+  }
+
+  if (req.user.username !== usernameFromRequest) {
+    return res.status(403).send({message: 'Invalid token'});
   }
 
   next();

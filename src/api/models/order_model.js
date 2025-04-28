@@ -14,7 +14,7 @@ const listOrders = async () => {
     const orderItems = await subOrderById(row.order);
     const filteredOrderItems = orderItems.map(
       // eslint-disable-next-line no-unused-vars
-      ({id, order_id, ...rest}) => rest
+      ({id, ...rest}) => rest
     );
     row.order = filteredOrderItems;
 
@@ -39,6 +39,7 @@ const orderById = async (id) => {
     'SELECT * FROM food_orders WHERE `order` = ?',
     [id]
   );
+
   const user = await findUserById(rows[0].customer);
 
   // eslint-disable-next-line no-unused-vars
