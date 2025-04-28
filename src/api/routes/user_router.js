@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import express from 'express';
-import {postUser} from '../controllers/user_controller.js';
+import {postUser, getUserById} from '../controllers/user_controller.js';
 import {upload} from '../../utils/multer.js';
 import {authenticateToken} from '../../middlewares.js';
 
@@ -9,8 +9,12 @@ const userRouter = express.Router();
 export const validateUser = (req, res, next) => {
   const usernameFromRequest = req.params.username;
 
-  if (res.decoded.username !== usernameFromRequest) {
-    return res.status(403).send({message: 'invalid token'});
+  if (!req.user || !req.user.username) {
+    return res.status(403).send({message: 'Invalid user data'});
+  }
+
+  if (req.user.username !== usernameFromRequest) {
+    return res.status(403).send({message: 'Invalid token'});
   }
 
   next();
@@ -34,5 +38,7 @@ userRouter.post(
     res.send({message: 'File uploaded successfully', file: req.file});
   }
 );
+
+userRouter.route('/:id').get(getUserById);
 
 export default userRouter;

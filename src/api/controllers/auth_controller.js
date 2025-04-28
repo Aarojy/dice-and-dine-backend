@@ -26,6 +26,7 @@ const authUser = async (req, res) => {
 
   const userWithNoPassword = {
     id: result.id,
+    name: result.name,
   };
 
   const token = jwt.sign(userWithNoPassword, process.env.JWT_SECRET, {

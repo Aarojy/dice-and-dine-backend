@@ -14,7 +14,7 @@ const listOrders = async () => {
     const orderItems = await subOrderById(row.order);
     const filteredOrderItems = orderItems.map(
       // eslint-disable-next-line no-unused-vars
-      ({id, order_id, ...rest}) => rest
+      ({id, ...rest}) => rest
     );
     row.order = filteredOrderItems;
 
@@ -36,7 +36,7 @@ const listOrders = async () => {
 
 const orderById = async (id) => {
   const [rows] = await promisePool.query(
-    'SELECT * FROM food_orders WHERE id = ?',
+    'SELECT * FROM food_orders WHERE `order` = ?',
     [id]
   );
 
