@@ -8,7 +8,7 @@ Content-Type: application/json
   "email": "bob@metropolia.fi"
 }
 
-### Get a specific user by ID (no password information)
+### Get a specific user details by ID (no password information), order ids included
 GET http://localhost:3000/api/v1/users/1
 Content-Type: application/json
 

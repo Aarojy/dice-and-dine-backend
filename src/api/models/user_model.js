@@ -1,5 +1,6 @@
 import promisePool from '../../utils/database.js';
 const userTable = 'registered_customers';
+const ordersTable = 'food_orders';
 
 const listUsers = async () => {
   const [rows] = await promisePool.query(`SELECT * FROM ${userTable}`);
@@ -11,7 +12,21 @@ const findUserById = async (id) => {
     `SELECT id, name, email, user_type FROM ${userTable} WHERE id = ?`,
     [id]
   );
-  return rows.length > 0 ? rows[0] : null;
+
+  if (rows.length === 0) {
+    return null;
+  }
+
+  const user = rows[0];
+
+  const [orders] = await promisePool.query(
+    `SELECT \`order\` as order_id FROM ${ordersTable} WHERE customer = ?`,
+    [id]
+  );
+
+  user.orders = orders.map((order) => order.order_id);
+
+  return user;
 };
 
 const addUser = async (user) => {
