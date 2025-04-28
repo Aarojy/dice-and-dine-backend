@@ -1,4 +1,4 @@
-import {addUser} from '../models/user_model.js';
+import {addUser, findUserById} from '../models/user_model.js';
 import bcrypt from 'bcrypt';
 
 const postUser = async (req, res) => {
@@ -38,4 +38,13 @@ const postUser = async (req, res) => {
   }
 };
 
-export {postUser};
+const getUserById = async (req, res) => {
+  const user = await findUserById(req.params.id);
+  if (user) {
+    res.json(user);
+  } else {
+    res.sendStatus(404);
+  }
+};
+
+export {postUser, getUserById};

@@ -8,7 +8,7 @@ const listUsers = async () => {
 
 const findUserById = async (id) => {
   const [rows] = await promisePool.query(
-    `SELECT * FROM ${userTable} WHERE id = ?`,
+    `SELECT id, name, email, user_type FROM ${userTable} WHERE id = ?`,
     [id]
   );
   return rows.length > 0 ? rows[0] : null;
