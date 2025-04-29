@@ -5,8 +5,8 @@ GET http://localhost:3000/api/v1/orders
 GET http://localhost:3000/api/v1/orders/5
 
 ### Create a new order
-POST http://localhost:3000/api/v1/orders/bobdoe
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbmVkb2UiLCJpYXQiOjE3NDU2NTk3NTksImV4cCI6MTc0NTc0NjE1OX0.Iu5Oo8ovBcYS97QWeJYwrVkRqLYvTRuh8ybyytBdvTg
+POST http://localhost:3000/api/v1/orders/janedoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImphbmVkb2UiLCJpYXQiOjE3NDU5MDYxMjIsImV4cCI6MTc0NTk5MjUyMn0.eNAKyjX3sAdgu3iWE2GArzP5xLzfDc8MuZjHHqPvZk8
 Content-Type: application/json
 
 {

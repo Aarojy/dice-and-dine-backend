@@ -1,0 +1,22 @@
+### Fetch all table reservations
+GET http://localhost:3000/api/v1/tables
+
+### Create a new reservation
+POST http://localhost:3000/api/v1/tables/reserve/janedoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImphbmVkb2UiLCJpYXQiOjE3NDU5MDYxMjIsImV4cCI6MTc0NTk5MjUyMn0.eNAKyjX3sAdgu3iWE2GArzP5xLzfDc8MuZjHHqPvZk8
+Content-Type: application/json
+
+{
+  "customer_id": 1,
+  "reservation": {
+    "arrival_time": "2025-04-29 09:12:09",
+    "departure_time": "2025-04-29 09:14:09",
+    "reservation_size": 4,
+    "additional_information": "Window seat, no smoking",
+    "tables": [
+      {"table_id": 1},
+      {"table_id": 2},
+      {"table_id": 3}
+    ]
+  }
+}
