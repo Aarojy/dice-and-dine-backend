@@ -10,16 +10,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuY
 Content-Type: application/json
 
 {
-  "customer_id": 1,
   "reservation": {
     "arrival_time": "2025-04-29 09:12:09",
     "departure_time": "2025-04-29 09:14:09",
     "reservation_size": 4,
     "additional_information": "Window seat, no smoking",
-    "tables": [
-      {"table_id": 3},
-      {"table_id": 4},
-      {"table_id": 5}
-    ]
+    "tables": [3,4,5]
   }
 }

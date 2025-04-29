@@ -54,7 +54,7 @@ export const createReservation = async (customer_id, reservation) => {
   for (const table of tables) {
     await promisePool.query(
       'INSERT INTO table_table (reservation_id, table_id) VALUES (?, ?)',
-      [reservationId, table.table_id]
+      [reservationId, table]
     );
   }
 

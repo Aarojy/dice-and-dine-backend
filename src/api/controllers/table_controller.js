@@ -23,14 +23,14 @@ export const getTables = async (req, res) => {
 };
 
 export const reserveTable = async (req, res) => {
-  const {customer_id, reservation} = req.body;
+  const {reservation} = req.body;
 
-  if (!customer_id || !reservation) {
+  if (!req.user.id || !reservation) {
     res.status(400).json({message: 'Missing user_id or order'});
     return;
   }
 
-  const result = await createReservation(customer_id, reservation);
+  const result = await createReservation(req.user.id, reservation);
   if (result.error) {
     res.status(500).json(result);
     return;
