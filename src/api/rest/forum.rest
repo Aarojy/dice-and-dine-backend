@@ -1,0 +1,22 @@
+### Fetch all messages
+GET http://localhost:3000/api/v1/forum
+
+### Create a post
+POST http://localhost:3000/api/v1/forum/post/robdoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo
+Content-Type: application/json
+
+{
+    "title": "My first post",
+    "message": "loren lipsum"
+}
+
+### Reply to a post
+POST http://localhost:3000/api/v1/forum/post/9/robdoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo
+Content-Type: application/json
+
+{
+    "title": "My first post",
+    "message": "loren lipsum"
+}

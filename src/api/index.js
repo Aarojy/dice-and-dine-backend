@@ -5,6 +5,7 @@ import infoRouter from './routes/info_router.js';
 import orderRouter from './routes/order_router.js';
 import tableRouter from './routes/table_router.js';
 import reviewRouter from './routes/review_router.js';
+import forumRouter from './routes/forum_router.js';
 
 const router = express.Router();
 
@@ -19,5 +20,7 @@ router.use('/info', infoRouter);
 router.use('/orders', orderRouter);
 
 router.use('/tables', tableRouter);
+
+router.use('/forum', forumRouter);
 
 export default router;
