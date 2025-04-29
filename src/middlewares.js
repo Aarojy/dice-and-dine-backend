@@ -13,7 +13,6 @@ const authenticateToken = (req, res, next) => {
       id: decoded.id,
       username: decoded.username,
     };
-    console.log('req.user', req.user);
     next();
 
     // eslint-disable-next-line no-unused-vars
