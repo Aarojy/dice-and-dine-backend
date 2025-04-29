@@ -1,0 +1,22 @@
+### Fetch reviews
+GET http://localhost:3000/api/v1/review
+
+### Create a review
+POST http://localhost:3000/api/v1/review/robdoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo
+Content-Type: application/json
+
+{
+    "review": "The food was great, but the service was slow.",
+    "rating": 4
+}
+
+### Create an anonymous review
+POST http://localhost:3000/api/v1/review/
+Content-Type: application/json
+
+{
+    "review": "The food was great, but the service was slow.",
+    "rating": 3
+}
+
