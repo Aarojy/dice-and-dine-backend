@@ -9,7 +9,7 @@ const listUsers = async () => {
 
 const findUserById = async (id) => {
   const [rows] = await promisePool.query(
-    `SELECT id, name, email, user_type FROM ${userTable} WHERE id = ?`,
+    `SELECT id, name, email, profile_image, user_type FROM ${userTable} WHERE id = ?`,
     [id]
   );
 
@@ -79,4 +79,21 @@ const login = async (user) => {
   return rows[0];
 };
 
-export {listUsers, findUserById, addUser, deleteUser, login};
+const updateUserProfileImage = async (userId, filename) => {
+  const sql = `
+    UPDATE ${userTable}
+    SET profile_image = ?
+    WHERE id = ?
+  `;
+  const values = [filename, userId];
+  await promisePool.query(sql, values);
+};
+
+export {
+  listUsers,
+  findUserById,
+  addUser,
+  deleteUser,
+  login,
+  updateUserProfileImage,
+};
