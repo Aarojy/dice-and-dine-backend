@@ -3,13 +3,13 @@ POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "bobdoe",
+  "username": "robdoe",
   "password": "pass",
-  "email": "bob@metropolia.fi"
+  "email": "rob@metropolia.fi"
 }
 
 ### Get a specific user details by ID (no password information), order ids included
-GET http://localhost:3000/api/v1/users/1
+GET http://localhost:3000/api/v1/users/14
 Content-Type: application/json
 
 ### Login to a specific user by ID
@@ -17,7 +17,7 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "username": "janedoe",
+  "username": "robdoe",
   "password": "pass"
 }
 
@@ -32,11 +32,11 @@ Content-Type: application/json
 
 ### token test
 GET http://localhost:3000/api/v1/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqYW5lZG9lIiwiaWF0IjoxNzQ1OTA4OTk5LCJleHAiOjE3NDU5OTUzOTl9.YOmH2vhuOg2CL6gGdo-R6A4b1mthFn_2Mz50eaC5aTw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo
 
 ### test sending a file
-POST http://localhost:3000/api/v1/users/img/bobdoe
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbmVkb2UiLCJpYXQiOjE3NDU2NTk3NTksImV4cCI6MTc0NTc0NjE1OX0.Iu5Oo8ovBcYS97QWeJYwrVkRqLYvTRuh8ybyytBdvTg
+POST http://localhost:3000/api/v1/users/img/robdoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW

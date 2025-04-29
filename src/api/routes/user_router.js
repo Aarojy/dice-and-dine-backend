@@ -8,6 +8,7 @@ const userRouter = express.Router();
 
 export const validateUser = (req, res, next) => {
   const usernameFromRequest = req.params.username;
+  console.log(req.user);
 
   if (!req.user || !req.user.username) {
     return res.status(403).send({message: 'Invalid user data'});

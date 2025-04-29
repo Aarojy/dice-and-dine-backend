@@ -20,14 +20,14 @@ const getOrderById = async (req, res) => {
 };
 
 const postOrder = async (req, res) => {
-  const {customer_id, order} = req.body;
+  const {order} = req.body;
 
-  if (!customer_id || !order) {
+  if (!req.user.id || !order) {
     res.status(400).json({message: 'Missing required fields'});
     return;
   }
 
-  const result = await createOrder(customer_id, order);
+  const result = await createOrder(req.user.id, order);
 
   if (!result) {
     res.status(500).json({message: 'Failed to create order'});

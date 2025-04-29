@@ -2,8 +2,8 @@
 GET http://localhost:3000/api/v1/tables
 
 ### Create a new reservation
-POST http://localhost:3000/api/v1/tables/reserve/janedoe
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImphbmVkb2UiLCJpYXQiOjE3NDU5MDYxMjIsImV4cCI6MTc0NTk5MjUyMn0.eNAKyjX3sAdgu3iWE2GArzP5xLzfDc8MuZjHHqPvZk8
+POST http://localhost:3000/api/v1/tables/reserve/robdoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo
 Content-Type: application/json
 
 {
