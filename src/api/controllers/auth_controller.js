@@ -12,6 +12,7 @@ const getMe = async (req, res) => {
 
 const authUser = async (req, res) => {
   const result = await login(req.body.username);
+  console.log('Login result in authuser: ', result);
   if (!result) {
     res.sendStatus(401);
     return;
@@ -26,7 +27,7 @@ const authUser = async (req, res) => {
 
   const userWithNoPassword = {
     id: result.id,
-    name: result.name,
+    username: result.name,
   };
 
   const token = jwt.sign(userWithNoPassword, process.env.JWT_SECRET, {
