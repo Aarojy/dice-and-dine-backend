@@ -1,6 +1,9 @@
 ### Fetch all table reservations
 GET http://localhost:3000/api/v1/tables
 
+### Fetch all tables
+GET http://localhost:3000/api/v1/tables/tables
+
 ### Create a new reservation
 POST http://localhost:3000/api/v1/tables/reserve/robdoe
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo

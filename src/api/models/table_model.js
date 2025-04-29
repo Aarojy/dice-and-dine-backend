@@ -22,6 +22,11 @@ export const listTableOrders = async () => {
   return rows;
 };
 
+export const listTables = async () => {
+  const tables = await promisePool.query('SELECT * FROM tables');
+  return tables[0];
+};
+
 export const createReservation = async (customer_id, reservation) => {
   const {
     arrival_time,

@@ -1,9 +1,22 @@
-import {listTableOrders, createReservation} from '../models/table_model.js';
+import {
+  listTableOrders,
+  createReservation,
+  listTables,
+} from '../models/table_model.js';
 
 export const getTableOrders = async (req, res) => {
   const result = await listTableOrders();
   if (result.length === 0) {
     res.status(404).json({message: 'No table orders found'});
+    return;
+  }
+  res.json(result);
+};
+
+export const getTables = async (req, res) => {
+  const result = await listTables();
+  if (result.length === 0) {
+    res.status(404).json({message: 'No tables found'});
     return;
   }
   res.json(result);
