@@ -1,4 +1,8 @@
-import {addUser, findUserById} from '../models/user_model.js';
+import {
+  addUser,
+  findUserById,
+  updateUserProfileImage,
+} from '../models/user_model.js';
 import bcrypt from 'bcrypt';
 
 const postUser = async (req, res) => {
@@ -47,4 +51,18 @@ const getUserById = async (req, res) => {
   }
 };
 
-export {postUser, getUserById};
+const uploadProfileImage = async (req, res) => {
+  try {
+    const filename = req.file.filename;
+    await updateUserProfileImage(req.user.id, filename);
+    res.send({
+      message: 'File uploaded successfully',
+      file: req.file,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({message: 'Failed to upload image or update user'});
+  }
+};
+
+export {postUser, getUserById, uploadProfileImage};
