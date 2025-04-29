@@ -24,7 +24,15 @@ const findUserById = async (id) => {
     [id]
   );
 
+  const [reservations] = await promisePool.query(
+    `SELECT id as reservation_id FROM table_reservations WHERE customer = ?`,
+    [id]
+  );
+
   user.orders = orders.map((order) => order.order_id);
+  user.reservations = reservations.map(
+    (reservation) => reservation.reservation_id
+  );
 
   return user;
 };

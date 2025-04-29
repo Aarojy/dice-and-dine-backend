@@ -14,9 +14,9 @@ Content-Type: application/json
     "reservation_size": 4,
     "additional_information": "Window seat, no smoking",
     "tables": [
-      {"table_id": 1},
-      {"table_id": 2},
-      {"table_id": 3}
+      {"table_id": 3},
+      {"table_id": 4},
+      {"table_id": 5}
     ]
   }
 }
