@@ -4,6 +4,7 @@ import {
   postUser,
   getUserById,
   uploadProfileImage,
+  putUser,
 } from '../controllers/user_controller.js';
 import {upload} from '../../utils/multer.js';
 import {authenticateToken} from '../../middlewares.js';
@@ -20,6 +21,20 @@ export const validateUser = (req, res, next) => {
 
   if (req.user.username !== usernameFromRequest) {
     return res.status(403).send({message: 'Invalid token'});
+  }
+
+  next();
+};
+
+export const validateUserById = (req, res, next) => {
+  const userIdFromRequest = Number(req.params.id);
+
+  if (!req.user || typeof req.user.id === 'undefined') {
+    return res.status(403).send({message: 'Invalid user data'});
+  }
+
+  if (req.user.id !== userIdFromRequest) {
+    return res.status(403).send({message: 'Invalid token or user mismatch'});
   }
 
   next();
@@ -42,6 +57,9 @@ userRouter.post(
   uploadProfileImage
 );
 
-userRouter.route('/:id').get(getUserById);
+userRouter
+  .route('/:id')
+  .get(getUserById)
+  .put(authenticateToken, validateUserById, putUser);
 
 export default userRouter;
