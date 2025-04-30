@@ -89,6 +89,36 @@ const updateUserProfileImage = async (userId, filename) => {
   await promisePool.query(sql, values);
 };
 
+const modifyUser = async (userId, user) => {
+  const updateFields = [];
+  const values = [];
+
+  // Dynamically add fields to the update query based on what is provided
+  if (user.username) {
+    updateFields.push('name = ?');
+    values.push(user.username);
+  }
+  if (user.password) {
+    updateFields.push('password = ?');
+    values.push(user.password);
+  }
+  if (user.email) {
+    updateFields.push('email = ?');
+    values.push(user.email);
+  }
+  if (user.user_type) {
+    updateFields.push('user_type = ?');
+    values.push(user.user_type);
+  }
+  values.push(userId);
+  const sql = `UPDATE ${userTable} SET ${updateFields.join(', ')} WHERE id = ?`;
+  const [result] = await promisePool.execute(sql, values);
+  if (result.affectedRows === 0) {
+    return {message: 'No changes made'};
+  }
+  return {message: 'User updated successfully'};
+};
+
 export {
   listUsers,
   findUserById,
@@ -96,4 +126,5 @@ export {
   deleteUser,
   login,
   updateUserProfileImage,
+  modifyUser,
 };
