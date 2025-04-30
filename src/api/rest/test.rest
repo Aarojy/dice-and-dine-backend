@@ -45,3 +45,13 @@ Content-Type: image/jpeg
 
 < ../../../150.jpg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Modify user test
+PUT http://localhost:3000/api/v1/users/9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwidXNlcm5hbWUiOiJuZXdwcnVkb2UiLCJpYXQiOjE3NDYwMDEyMTcsImV4cCI6MTc0NjA4NzYxN30.ke20bX7xPeah8aCIBww99wxB8grd5VfDMxFmNnjyf80
+Example body:
+{
+  "username": "prudoethebest",
+  "email" : "editpru@email.eu",
+  "password": "newpass"
+}
