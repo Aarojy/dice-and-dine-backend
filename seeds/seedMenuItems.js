@@ -2,6 +2,22 @@ import promisePool from '../src/utils/database.js';
 
 const menuItems = [
   {
+    name: 'Mini Garlic Bread Bites',
+    price: 3.9,
+    category: 6,
+    allergens: ['7', '9'],
+    description: 'Toasted garlic bread with herb butter',
+    lang: 'en',
+  },
+  {
+    name: 'Cheesy Garlic Sticks',
+    price: 4.5,
+    category: 6,
+    allergens: ['7', '9'],
+    description: 'Warm breadsticks loaded with garlic butter and melted cheese',
+    lang: 'en',
+  },
+  {
     name: 'Mini Mozzarella Bites',
     price: 5.0,
     category: 6,
