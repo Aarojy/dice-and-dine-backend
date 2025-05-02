@@ -69,10 +69,20 @@ const uploadProfileImage = async (req, res) => {
 const putUser = async (req, res) => {
   try {
     const {id} = req.params;
-    let {username, password, email, user_type} = req.body;
-
+    let {username, password, email, user_type, oldpassword} = req.body;
     let hashedPassword;
     if (password) {
+      if (!oldpassword) {
+        return res.status(400).json({message: 'Old password is required'});
+      }
+      const user = await findUserById(id);
+      if (!user) {
+        return res.status(404).json({message: 'User not found'});
+      }
+      const passwordMatch = await bcrypt.compare(oldpassword, user.password);
+      if (!passwordMatch) {
+        return res.status(403).json({message: 'Incorrect old password'});
+      }
       hashedPassword = await bcrypt.hash(password, 10);
     }
 
