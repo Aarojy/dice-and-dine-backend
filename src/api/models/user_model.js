@@ -9,7 +9,7 @@ const listUsers = async () => {
 
 const findUserById = async (id) => {
   const [rows] = await promisePool.query(
-    `SELECT id, name, email, profile_image, user_type FROM ${userTable} WHERE id = ?`,
+    `SELECT id, name, email, profile_image, user_type, password FROM ${userTable} WHERE id = ?`,
     [id]
   );
 

@@ -60,6 +60,12 @@ userRouter.post(
 userRouter
   .route('/:id')
   .get(getUserById)
-  .put(authenticateToken, validateUserById, putUser);
-
+  .put(authenticateToken, validateUserById, async (req, res) => {
+    try {
+      await putUser(req, res);
+    } catch (error) {
+      console.error('Error updating user:', error);
+      res.status(500).json({error: 'Internal server error'});
+    }
+  });
 export default userRouter;
