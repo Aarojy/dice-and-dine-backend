@@ -43,7 +43,6 @@ const postOrder = async (req, res) => {
 };
 
 const postOrderStatus = async (req, res) => {
-  console.log('REQ.BODY:', req.body);
   const {order_id, status} = req.body;
 
   if (req.user.user_type !== 'admin') {
@@ -52,6 +51,18 @@ const postOrderStatus = async (req, res) => {
 
   if (!order_id || !status) {
     return res.status(400).json({message: 'Missing required fields'});
+  }
+
+  const validStatuses = [
+    'pending',
+    'confirmed',
+    'ready',
+    'completed',
+    'cancelled',
+  ];
+
+  if (!validStatuses.includes(status)) {
+    return res.status(400).json({message: 'Invalid status value'});
   }
 
   const result = await editOrderStatus(order_id, status);
