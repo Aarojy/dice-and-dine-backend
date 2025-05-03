@@ -112,4 +112,20 @@ const createOrder = async (user_id, order) => {
   };
 };
 
-export {listOrders, orderById, createOrder, subOrderById};
+const editOrderStatus = async (order_id, status) => {
+  try {
+    const [rows] = await promisePool.query(
+      'UPDATE `order` SET status = ? WHERE order_id = ?',
+      [status, order_id]
+    );
+    if (rows.affectedRows === 0) {
+      return {message: 'No order found with that ID'};
+    }
+    return {message: 'Order status updated successfully'};
+  } catch (error) {
+    console.error(error);
+    return {message: 'Failed to update order status', error: error};
+  }
+};
+
+export {listOrders, orderById, createOrder, subOrderById, editOrderStatus};

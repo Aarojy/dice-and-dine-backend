@@ -19,3 +19,15 @@ Content-Type: application/json
     "quantity": 2}
   ]
 }
+
+### Change order status
+POST http://localhost:3000/api/v1/orders/status
+Authorization: Bearer Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInVzZXJuYW1lIjoicm9iZG9lIiwiaWF0IjoxNzQ1OTA5MjQwLCJleHAiOjE3NDU5OTU2NDB9.0GEMwICaELs6PWnJ3Dp8-_Oy0iP07ewBSYucqsLylHo
+Content-Type: application/json
+
+Valid statuses: pending, confirmed, ready, completed, cancelled
+
+{
+  "order_id" : "4",
+  "status" : "ready"
+  }

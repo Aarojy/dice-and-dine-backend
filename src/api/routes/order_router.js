@@ -5,11 +5,14 @@ import {
   getOrders,
   getOrderById,
   postOrder,
+  postOrderStatus,
 } from '../controllers/order_controller.js';
 
 const orderRouter = express.Router();
 
 orderRouter.route('/').get(getOrders);
+
+orderRouter.route('/status').post(authenticateToken, postOrderStatus);
 
 orderRouter.route('/:id').get(getOrderById);
 
