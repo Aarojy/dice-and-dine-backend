@@ -1,4 +1,9 @@
-import {listOrders, orderById, createOrder} from '../models/order_model.js';
+import {
+  listOrders,
+  orderById,
+  createOrder,
+  editOrderStatus,
+} from '../models/order_model.js';
 
 const getOrders = async (req, res) => {
   const result = await listOrders();
@@ -37,4 +42,24 @@ const postOrder = async (req, res) => {
   res.status(201).json(result);
 };
 
-export {getOrders, getOrderById, postOrder};
+const postOrderStatus = async (req, res) => {
+  console.log('REQ.BODY:', req.body);
+  const {order_id, status} = req.body;
+
+  if (req.user.user_type !== 'admin') {
+    return res.status(403).json({message: 'Unauthorized'});
+  }
+
+  if (!order_id || !status) {
+    return res.status(400).json({message: 'Missing required fields'});
+  }
+
+  const result = await editOrderStatus(order_id, status);
+
+  if (result.message !== 'Order status updated successfully') {
+    return res.status(500).json(result);
+  }
+
+  return res.status(200).json(result);
+};
+export {getOrders, getOrderById, postOrder, postOrderStatus};
