@@ -12,6 +12,7 @@ const authenticateToken = (req, res, next) => {
     req.user = {
       id: decoded.id,
       username: decoded.username,
+      user_type: decoded.user_type,
     };
     next();
 
