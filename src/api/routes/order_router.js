@@ -6,6 +6,8 @@ import {
   getOrderById,
   postOrder,
   postOrderStatus,
+  postMenuItem,
+  deleteMenuItem,
 } from '../controllers/order_controller.js';
 
 const orderRouter = express.Router();
@@ -13,6 +15,10 @@ const orderRouter = express.Router();
 orderRouter.route('/').get(getOrders);
 
 orderRouter.route('/status').post(authenticateToken, postOrderStatus);
+
+orderRouter.route('/menu/').post(authenticateToken, postMenuItem);
+
+orderRouter.route('/menu/:id').delete(authenticateToken, deleteMenuItem);
 
 orderRouter.route('/:id').get(getOrderById);
 

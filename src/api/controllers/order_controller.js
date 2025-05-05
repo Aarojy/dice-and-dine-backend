@@ -3,6 +3,8 @@ import {
   orderById,
   createOrder,
   editOrderStatus,
+  addMenuItem,
+  removeMenuItem,
 } from '../models/order_model.js';
 
 const getOrders = async (req, res) => {
@@ -73,4 +75,52 @@ const postOrderStatus = async (req, res) => {
 
   return res.status(200).json(result);
 };
-export {getOrders, getOrderById, postOrder, postOrderStatus};
+
+const postMenuItem = async (req, res) => {
+  const {menu_item} = req.body;
+
+  if (req.user.user_type !== 'admin') {
+    return res.status(403).json({message: 'Unauthorized'});
+  }
+
+  if (!menu_item) {
+    return res.status(400).json({message: 'Missing required fields'});
+  }
+
+  const result = await addMenuItem(menu_item);
+
+  if (!result) {
+    return res.status(500).json({message: 'Failed to add menu item'});
+  }
+
+  return res.status(201).json({message: 'Menu item added successfully'});
+};
+
+const deleteMenuItem = async (req, res) => {
+  const {id} = req.params;
+
+  if (req.user.user_type !== 'admin') {
+    return res.status(403).json({message: 'Unauthorized'});
+  }
+
+  if (!id) {
+    return res.status(400).json({message: 'Missing required fields'});
+  }
+
+  const result = await removeMenuItem(id);
+
+  if (!result) {
+    return res.status(500).json({message: 'Failed to delete menu item'});
+  }
+
+  return res.status(200).json({message: 'Menu item deleted successfully'});
+};
+
+export {
+  getOrders,
+  getOrderById,
+  postOrder,
+  postOrderStatus,
+  postMenuItem,
+  deleteMenuItem,
+};

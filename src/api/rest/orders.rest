@@ -31,3 +31,25 @@ Valid statuses: pending, confirmed, ready, completed, cancelled
   "order_id" : "4",
   "status" : "ready"
   }
+
+
+### Add item to menu
+POST http://localhost:3000/api/v1/orders/menu
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsInVzZXJuYW1lIjoiYWRtaW4iLCJ1c2VyX3R5cGUiOiJhZG1pbiIsImlhdCI6MTc0NjQzMjY4OCwiZXhwIjoxNzQ2NTE5MDg4fQ.DqiJ3FV6nmKM0K0XDlGiaXL4aA78bIaQbRrDrzpXBsc
+Content-Type: application/json
+
+{
+  "menu_item": {
+    "name": "Testi",
+    "price": 5055.00,
+    "categories": [2,3],
+    "description": "Testi testi",
+    "allergens": [2, 3],
+    "lang": "en"
+  }
+}
+
+### Delete item from menu
+DELETE http://localhost:3000/api/v1/orders/menu/129
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsInVzZXJuYW1lIjoiYWRtaW4iLCJ1c2VyX3R5cGUiOiJhZG1pbiIsImlhdCI6MTc0NjQzMjY4OCwiZXhwIjoxNzQ2NTE5MDg4fQ.DqiJ3FV6nmKM0K0XDlGiaXL4aA78bIaQbRrDrzpXBsc
+
