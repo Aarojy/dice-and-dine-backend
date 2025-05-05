@@ -12,9 +12,9 @@ const tableRouter = express.Router();
 
 tableRouter.route('/').get(getTableOrders);
 
-tableRouter.route('/:id').get(getTableOrder);
-
 tableRouter.route('/tables').get(getTables);
+
+tableRouter.route('/:id').get(getTableOrder);
 
 tableRouter
   .route('/reserve/:username')
