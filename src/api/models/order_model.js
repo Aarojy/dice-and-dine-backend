@@ -36,7 +36,7 @@ const listOrders = async () => {
 
 const orderById = async (id) => {
   const [rows] = await promisePool.query(
-    'SELECT * FROM food_orders WHERE `order` = ?',
+    'SELECT customer, `order`, time FROM food_orders WHERE `order` = ?',
     [id]
   );
 
@@ -66,6 +66,7 @@ const orderById = async (id) => {
   ({menu_item_id, ...rest}) => rest;
 
   rows[0].order = filteredOrderItems;
+  rows[0].id = id;
 
   return rows[0];
 };
