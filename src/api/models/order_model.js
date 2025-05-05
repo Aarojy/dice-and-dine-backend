@@ -128,4 +128,72 @@ const editOrderStatus = async (order_id, status) => {
   }
 };
 
-export {listOrders, orderById, createOrder, subOrderById, editOrderStatus};
+const removeMenuItem = async (id) => {
+  try {
+    const [rows] = await promisePool.query('DELETE FROM `menu` WHERE id = ?', [
+      id,
+    ]);
+    if (rows.affectedRows === 0) {
+      return {message: 'No order found with that ID'};
+    }
+    await promisePool.query(
+      'DELETE FROM allergen_table WHERE menu_item_id = ?',
+      [id]
+    );
+    await promisePool.query(
+      'DELETE FROM category_table WHERE menu_item_id = ?',
+      [id]
+    );
+
+    return {message: 'Order deleted successfully'};
+  } catch (error) {
+    console.error(error);
+    return {message: 'Failed to delete order', error: error};
+  }
+};
+
+const addMenuItem = async (menu_item) => {
+  try {
+    const [rows] = await promisePool.query(
+      'INSERT INTO menu (name, price, description, lang) VALUES (?, ?, ?, ?)',
+      [menu_item.name, menu_item.price, menu_item.description, menu_item.lang]
+    );
+
+    const [menuMax] = await promisePool.query(
+      'SELECT MAX(id) AS `maxId` FROM menu'
+    );
+    const maxId = menuMax[0].maxId;
+
+    for (const allergen of menu_item.allergens) {
+      await promisePool.query(
+        'INSERT INTO allergen_table (allergen_id, menu_item_id) VALUES (?, ?)',
+        [allergen, maxId]
+      );
+    }
+
+    for (const category of menu_item.categories) {
+      await promisePool.query(
+        'INSERT INTO category_table (category_id, menu_item_id) VALUES (?, ?)',
+        [category, maxId]
+      );
+    }
+
+    if (rows.affectedRows === 0) {
+      return {message: 'Failed to add menu item'};
+    }
+    return {message: 'Menu item added successfully'};
+  } catch (error) {
+    console.error(error);
+    return {message: 'Failed to add menu item', error: error};
+  }
+};
+
+export {
+  listOrders,
+  orderById,
+  createOrder,
+  subOrderById,
+  editOrderStatus,
+  removeMenuItem,
+  addMenuItem,
+};

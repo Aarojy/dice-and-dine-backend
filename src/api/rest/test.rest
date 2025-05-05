@@ -3,9 +3,9 @@ POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "robdoe",
-  "password": "pass",
-  "email": "rob@metropolia.fi"
+  "username": "admin",
+  "password": "admin",
+  "email": "admin@metropolia.fi"
 }
 
 ### Get a specific user details by ID (no password information), order ids included
@@ -17,8 +17,8 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "username": "janedoe",
-  "password": "pass"
+  "username": "admin",
+  "password": "admin"
 }
 
 ### Login to a specific user by ID with incorrect password
