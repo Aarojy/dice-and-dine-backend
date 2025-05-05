@@ -6,7 +6,18 @@ import {
   getBoardgamesFromDatabase,
   getItemCategoriesFromDatabase,
   getGameCategoriesFromDatabase,
+  fetchPublicTransport,
 } from '../models/info_model.js';
+
+const getPublicTransport = async (req, res) => {
+  try {
+    const publicTransport = await fetchPublicTransport();
+    res.status(200).json(publicTransport);
+    // eslint-disable-next-line no-unused-vars
+  } catch (error) {
+    res.status(500).json({error: 'Internal server error'});
+  }
+};
 
 /* eslint-disable no-unused-vars */
 const getMenu = async (req, res) => {
@@ -80,4 +91,5 @@ export {
   getBoardgames,
   getItemCategories,
   getGameCategories,
+  getPublicTransport,
 };

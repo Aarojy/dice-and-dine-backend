@@ -7,6 +7,7 @@ import {
   getBoardgames,
   getGameCategories,
   getItemCategories,
+  getPublicTransport,
 } from '../controllers/info_controller.js';
 
 const infoRouter = express.Router();
@@ -24,5 +25,7 @@ infoRouter.route('/boardgames/:lang').get(getBoardgames);
 infoRouter.route('/itemcategories/:lang').get(getItemCategories);
 
 infoRouter.route('/gamecategories/:lang').get(getGameCategories);
+
+infoRouter.route('/getPublicTransport').get(getPublicTransport);
 
 export default infoRouter;

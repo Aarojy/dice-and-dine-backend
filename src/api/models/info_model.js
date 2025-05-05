@@ -160,6 +160,112 @@ const getGameCategoriesFromDatabase = async (lang) => {
   return rows;
 };
 
+const fetchPublicTransport = async () => {
+  try {
+    const restaurantData = await getRestaurantFromDatabase('fi');
+    const lat = restaurantData[0].latitude;
+    const lon = restaurantData[0].longitude;
+
+    const responseScooter = await fetch(process.env.DIGITRANSIT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'digitransit-subscription-key': process.env.DIGITRANSIT_API_KEY,
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            nearest(
+              lat: ${lat},
+              lon: ${lon},
+              maxDistance: 200,
+              filterByPlaceTypes: [VEHICLE_RENT]
+            ) {
+              edges {
+                node {
+                  place {
+                    __typename
+                    ... on Stop {
+                      name
+                      lat
+                      lon
+                      code
+                    }
+                    ... on RentalVehicle {
+                      name
+                      lat
+                      lon
+                    }
+                    ... on DepartureRow {
+                      lat
+                      lon
+                    }
+                  }
+                  distance
+                }
+              }
+            }
+          }
+        `,
+      }),
+    });
+
+    const responseStops = await fetch(process.env.DIGITRANSIT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'digitransit-subscription-key': process.env.DIGITRANSIT_API_KEY,
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            nearest(
+              lat: ${lat},
+              lon: ${lon},
+              maxDistance: 200,
+              filterByPlaceTypes: [STOP, STATION, CAR_PARK, BIKE_PARK]
+            ) {
+              edges {
+                node {
+                  place {
+                    __typename
+                    ... on Stop {
+                      name
+                      lat
+                      lon
+                      code
+                    }
+                    ... on RentalVehicle {
+                      name
+                      lat
+                      lon
+                    }
+                    ... on DepartureRow {
+                      lat
+                      lon
+                    }
+                  }
+                  distance
+                }
+              }
+            }
+          }
+        `,
+      }),
+    });
+
+    const scooterData = await responseScooter.json();
+    const stopsData = await responseStops.json();
+
+    const response = {scooters: scooterData, stops: stopsData};
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching public transport data:', error);
+    throw error;
+  }
+};
+
 export {
   getMenuFromDatabase,
   getMenuItemFromDatabase,
@@ -168,4 +274,5 @@ export {
   getBoardgamesFromDatabase,
   getItemCategoriesFromDatabase,
   getGameCategoriesFromDatabase,
+  fetchPublicTransport,
 };
