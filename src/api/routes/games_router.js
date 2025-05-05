@@ -4,11 +4,14 @@ import express from 'express';
 import {
   getGameReservations,
   postGameReservation,
+  getGameReservationById,
 } from '../controllers/games_controller.js';
 
 const gamesRouter = express.Router();
 
 gamesRouter.route('/').get(getGameReservations);
+
+gamesRouter.route('/:id').get(getGameReservationById);
 
 gamesRouter
   .route('/:username')
