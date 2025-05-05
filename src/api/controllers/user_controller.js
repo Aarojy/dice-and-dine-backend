@@ -3,8 +3,27 @@ import {
   findUserById,
   updateUserProfileImage,
   modifyUser,
+  listUsers,
 } from '../models/user_model.js';
 import bcrypt from 'bcrypt';
+
+const getUsers = async (req, res) => {
+  if (req.user.user_type !== 'admin') {
+    return res.status(403).json({message: 'Access denied'});
+  }
+  try {
+    const users = await listUsers();
+    if (users.length > 0) {
+      const filteredUsers = users.map(({password, ...user}) => user);
+      res.json(filteredUsers);
+    } else {
+      res.status(404).json({message: 'No users found'});
+    }
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({error: 'Internal server error'});
+  }
+};
 
 const postUser = async (req, res) => {
   try {
@@ -111,4 +130,4 @@ const putUser = async (req, res) => {
   }
 };
 
-export {postUser, getUserById, uploadProfileImage, putUser};
+export {postUser, getUserById, uploadProfileImage, putUser, getUsers};
