@@ -1,0 +1,15 @@
+### Fetch all orders
+GET http://localhost:3000/api/v1/games
+
+### Reserve a game
+POST http://localhost:3000/api/v1/games/janedoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqYW5lZG9lIiwidXNlcl90eXBlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NDY0MjU3NDAsImV4cCI6MTc0NjUxMjE0MH0.dPx_v4TUKJqnGzwYdBTklyp_WmKH9iWYtJKHvv9UrAw
+Content-Type: application/json
+
+{
+  "reservation": {
+    "arrival_time": "2025-04-29 09:12:09",
+    "departure_time": "2025-04-29 09:14:09",
+    "game_id": 5
+  }
+}
