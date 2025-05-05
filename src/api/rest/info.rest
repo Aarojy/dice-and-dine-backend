@@ -19,3 +19,5 @@ GET http://localhost:3000/api/v1/info/itemcategories/fi
 ### Fetch game category info
 GET http://localhost:3000/api/v1/info/gamecategories/fi
 
+### Fetch public translation info
+GET http://localhost:3000/api/v1/info/getPublicTransport
