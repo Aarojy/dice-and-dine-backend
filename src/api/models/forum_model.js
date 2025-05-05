@@ -1,5 +1,18 @@
 import promisePool from '../../utils/database.js';
 
+const getMessageTxt = async (message_id) => {
+  const [rows] = await promisePool.query(
+    'SELECT message FROM message WHERE id = ?',
+    [message_id]
+  );
+
+  if (rows.length === 0) {
+    throw new Error('Message not found');
+  }
+
+  return rows[0].message;
+};
+
 const listForumPosts = async () => {
   const [rows] = await promisePool.query(
     'SELECT * FROM message_table WHERE to_message_id IS NULL'
@@ -8,8 +21,10 @@ const listForumPosts = async () => {
   // Create a deep copy of rows
   let result = rows.map((row) => ({...row}));
 
-  // Recursively find all child messages for each root message
   for (const row of result) {
+    // Fetch the message text for each child message
+    row.message = await getMessageTxt(row.message_id);
+    //  find all child messages for each root message
     row.replies = await findChildMessages(row.id);
   }
 
@@ -23,8 +38,10 @@ const findChildMessages = async (message_id) => {
     [message_id]
   );
 
-  // Recursively find children for each child message
   for (const row of rows) {
+    // Fetch the message text for each child message
+    row.message = await getMessageTxt(row.message_id);
+    // find children for each child message
     row.replies = await findChildMessages(row.id);
   }
 
