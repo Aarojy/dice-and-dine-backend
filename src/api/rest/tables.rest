@@ -1,6 +1,9 @@
 ### Fetch all table reservations
 GET http://localhost:3000/api/v1/tables
 
+### Fetch a specific table reservation
+GET http://localhost:3000/api/v1/tables/13
+
 ### Fetch all tables
 GET http://localhost:3000/api/v1/tables/tables
 
