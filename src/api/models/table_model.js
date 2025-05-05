@@ -1,6 +1,32 @@
 import promisePool from '../../utils/database.js';
 import {findUserById} from './user_model.js';
 
+export const fetchTableOrder = async (id) => {
+  const [rows] = await promisePool.query(
+    'SELECT * FROM table_reservations WHERE id = ?',
+    [id]
+  );
+
+  if (rows.length === 0) {
+    return null;
+  }
+
+  const user = await findUserById(rows[0].customer);
+
+  // eslint-disable-next-line no-unused-vars
+  const {password, user_type, ...userWithoutPassword} = user;
+  rows[0].customer = userWithoutPassword;
+
+  const reservation = await promisePool.query(
+    'SELECT table_id FROM table_table WHERE reservation_id = ?',
+    [id]
+  );
+
+  rows[0].tables = reservation[0].map((table) => table.table_id);
+
+  return rows[0];
+};
+
 export const listTableOrders = async () => {
   const [rows] = await promisePool.query('SELECT * FROM table_reservations');
 
@@ -61,4 +87,9 @@ export const createReservation = async (customer_id, reservation) => {
   return {reservation_id: reservationId};
 };
 
-export default {listTableOrders};
+export default {
+  listTableOrders,
+  createReservation,
+  listTables,
+  fetchTableOrder,
+};
