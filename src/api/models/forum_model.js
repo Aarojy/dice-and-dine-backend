@@ -15,11 +15,14 @@ const getMessageTxt = async (message_id) => {
 
 const listForumPosts = async () => {
   const [rows] = await promisePool.query(
-    'SELECT * FROM message_table WHERE to_message_id IS NULL'
+    `SELECT mt.*, m.message, m.title, m.user_id, m.time
+     FROM message_table mt
+     JOIN message m ON mt.message_id = m.id
+     WHERE mt.to_message_id IS NULL`
   );
 
   // Create a deep copy of rows
-  let result = rows.map((row) => ({...row}));
+  let result = rows.map((row) => ({ ...row }));
 
   for (const row of result) {
     // Fetch the message text for each child message
@@ -34,7 +37,10 @@ const listForumPosts = async () => {
 const findChildMessages = async (message_id) => {
   // Fetch all direct child messages
   const [rows] = await promisePool.query(
-    'SELECT * FROM message_table WHERE to_message_id = ?',
+    `SELECT mt.*, m.message, m.title, m.user_id, m.time
+     FROM message_table mt
+     JOIN message m ON mt.message_id = m.id
+     WHERE mt.to_message_id = ?`,
     [message_id]
   );
 
@@ -62,4 +68,4 @@ const insertMessage = async (message, title, user_id, to_id) => {
   return result;
 };
 
-export {listForumPosts, insertMessage};
+export { listForumPosts, insertMessage };
