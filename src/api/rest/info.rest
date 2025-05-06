@@ -21,3 +21,18 @@ GET http://localhost:3000/api/v1/info/gamecategories/fi
 
 ### Fetch public translation info
 GET http://localhost:3000/api/v1/info/getPublicTransport
+
+
+
+### Change restaurant phone
+POST http://localhost:3000/api/v1/info/restaurant/phone/10123456786
+
+### Change restaurant email
+POST http://localhost:3000/api/v1/info/restaurant/email/demo@metropolia.com
+
+### Change restaurant open times
+POST http://localhost:3000/api/v1/info/restaurant/open/9am-10pm
+
+10123456789
+9am-9pm
+demo@gmail.com
