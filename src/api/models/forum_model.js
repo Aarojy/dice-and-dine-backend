@@ -75,6 +75,7 @@ const insertMessage = async (message, title, user_id, to_id) => {
     [result.insertId]
   );
   insertedMessage[0].toMessage = insertedMessageTable[0].to_message_id;
+  insertedMessage[0].messageTableId = insertedMessageTable[0].id;
 
   return {
     result: result,

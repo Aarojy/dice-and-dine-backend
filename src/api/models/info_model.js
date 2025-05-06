@@ -186,7 +186,7 @@ const fetchPublicTransport = async () => {
             nearest(
               lat: ${lat},
               lon: ${lon},
-              maxDistance: 200,
+              maxDistance: 300,
               filterByPlaceTypes: [VEHICLE_RENT]
             ) {
               edges {
@@ -230,7 +230,7 @@ const fetchPublicTransport = async () => {
             nearest(
               lat: ${lat},
               lon: ${lon},
-              maxDistance: 200,
+              maxDistance: 300,
               filterByPlaceTypes: [STOP, STATION, CAR_PARK, BIKE_PARK]
             ) {
               edges {
