@@ -1,6 +1,6 @@
 # 🎲 Dice & Dine Backend
 
-The backend service for the Dice & Dine application—a platform that combines the joy of board gaming with dining experiences. This API handles user management, game and restaurant data, reservations, and more.([Explore Branson][1])
+The backend service for the Dice & Dine application—a platform that combines the joy of board gaming with dining experiences. This API handles user management, game and restaurant data, reservations, and more.
 
 ---
 
@@ -103,8 +103,16 @@ dice-and-dine-backend/
 
 ```
 
+## 🌐 Frontend Repository
+
+The frontend for this project can be found here:
+👉 [Dice & Dine Frontend]([https://github.com/WelehoBRUDER/dice-and-dine-frontend])
+
+---
+
 ## 📄 License
 
 This project is licensed under the [Apache-2.0 License](LICENSE).([GitHub][4])
 
 ---
+
