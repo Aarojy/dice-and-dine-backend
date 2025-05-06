@@ -8,6 +8,9 @@ import {
   getGameCategories,
   getItemCategories,
   getPublicTransport,
+  postRestaurantEmail,
+  postRestaurantNumber,
+  postRestaurantOpen,
 } from '../controllers/info_controller.js';
 
 const infoRouter = express.Router();
@@ -17,6 +20,12 @@ infoRouter.route('/menu/:lang').get(getMenu);
 infoRouter.route('/menu/item/:id').get(getMenuItem);
 
 infoRouter.route('/allergens/:lang').get(getAllergens);
+
+infoRouter.route('/restaurant/phone/:number').post(postRestaurantNumber);
+
+infoRouter.route('/restaurant/email/:email').post(postRestaurantEmail);
+
+infoRouter.route('/restaurant/open/:open').post(postRestaurantOpen);
 
 infoRouter.route('/restaurant/:lang').get(getRestaurant);
 

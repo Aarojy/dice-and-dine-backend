@@ -117,6 +117,14 @@ const getRestaurantFromDatabase = async (lang) => {
   return rows;
 };
 
+const changeRestaurantInfo = async (info, type) => {
+  await promisePool.query(
+    `UPDATE restaurant_info
+     SET ${type}='${info}'`
+  );
+  return;
+};
+
 const getBoardgamesFromDatabase = async (lang) => {
   let result = [];
 
@@ -275,4 +283,5 @@ export {
   getItemCategoriesFromDatabase,
   getGameCategoriesFromDatabase,
   fetchPublicTransport,
+  changeRestaurantInfo,
 };

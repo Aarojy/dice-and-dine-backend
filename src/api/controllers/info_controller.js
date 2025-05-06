@@ -7,6 +7,7 @@ import {
   getItemCategoriesFromDatabase,
   getGameCategoriesFromDatabase,
   fetchPublicTransport,
+  changeRestaurantInfo,
 } from '../models/info_model.js';
 
 const getPublicTransport = async (req, res) => {
@@ -58,6 +59,55 @@ const getRestaurant = async (req, res) => {
   }
 };
 
+const postRestaurantNumber = async (req, res) => {
+  try {
+    const {number} = req.params;
+
+    if (!number) {
+      return res.status(400).json({error: 'Invalid phone number'});
+    }
+
+    changeRestaurantInfo(number, 'phone');
+
+    res.status(200).json({message: 'Phone number saved successfully'});
+  } catch (error) {
+    res.status(500).json({error: 'Internal server error'});
+  }
+};
+
+const postRestaurantEmail = async (req, res) => {
+  try {
+    const {email} = req.params;
+
+    if (!email) {
+      return res.status(400).json({error: 'Invalid email'});
+    }
+
+    changeRestaurantInfo(email, 'email');
+
+    res.status(200).json({message: 'Email saved successfully'});
+  } catch (error) {
+    res.status(500).json({error: 'Internal server error'});
+  }
+};
+
+const postRestaurantOpen = async (req, res) => {
+  try {
+    const {open} = req.params;
+    console.log(open);
+
+    if (!open) {
+      return res.status(400).json({error: 'Invalid open times'});
+    }
+
+    changeRestaurantInfo(open, 'open_times');
+
+    res.status(200).json({message: 'Open times saved successfully'});
+  } catch (error) {
+    res.status(500).json({error: 'Internal server error'});
+  }
+};
+
 const getBoardgames = async (req, res) => {
   try {
     const boardgames = await getBoardgamesFromDatabase(req.params.lang); // Replace with actual database call
@@ -92,4 +142,7 @@ export {
   getItemCategories,
   getGameCategories,
   getPublicTransport,
+  postRestaurantEmail,
+  postRestaurantOpen,
+  postRestaurantNumber,
 };
