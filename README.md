@@ -64,7 +64,7 @@ The backend service for the Dice & Dine application—a platform that combines t
    DB_NAME=           # Name of the MySQL database to use
 
    # 🔐 Authentication
-   JWT_SECRET=your_jwt_secret  # Secret key used to sign and verify JWT tokens for secure user authentication
+   JWT_SECRET=                # Secret key used to sign and verify JWT tokens for secure user authentication
 
    # 🚍 Transit API
    DIGITRANSIT_URL=           # Base URL for the Digitransit API (e.g., https://api.digitransit.fi/routing/v1/)
@@ -106,13 +106,13 @@ dice-and-dine-backend/
 ## 🌐 Frontend Repository
 
 The frontend for this project can be found here:
-👉 [Dice & Dine Frontend]([https://github.com/WelehoBRUDER/dice-and-dine-frontend])
+👉 [Dice & Dine Frontend](https://github.com/WelehoBRUDER/dice-and-dine-frontend)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [Apache-2.0 License](LICENSE).([GitHub][4])
+This project is licensed under the [Apache-2.0 License](LICENSE).
 
 ---
 
