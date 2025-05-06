@@ -17,25 +17,24 @@ export const postMessage = async (req, res) => {
     return;
   }
 
+  let result = null;
   if (!req.params.to_id) {
-    const result = await insertMessage(message, title, req.user.id, null);
-    if (result.affectedRows === 0) {
+    result = await insertMessage(message, title, req.user.id, null);
+    if (result.result.affectedRows === 0) {
       res.status(500).json({message: 'Failed to post message'});
       return;
     }
   } else {
-    const result = await insertMessage(
-      message,
-      title,
-      req.user.id,
-      req.params.to_id
-    );
-    if (result.affectedRows === 0) {
+    result = await insertMessage(message, title, req.user.id, req.params.to_id);
+    if (result.result.affectedRows === 0) {
       res.status(500).json({message: 'Failed to post reply'});
       return;
     }
   }
-  res.status(201).json({message: 'Message posted successfully', txt: message});
+  res.status(201).json({
+    message: 'Message posted successfully',
+    result: result.message,
+  });
 };
 
 export default {getAllMessages, postMessage};

@@ -22,7 +22,7 @@ const listForumPosts = async () => {
   );
 
   // Create a deep copy of rows
-  let result = rows.map((row) => ({ ...row }));
+  let result = rows.map((row) => ({...row}));
 
   for (const row of result) {
     // Fetch the message text for each child message
@@ -65,7 +65,21 @@ const insertMessage = async (message, title, user_id, to_id) => {
     [user_id, result.insertId, to_id]
   );
 
-  return result;
+  const [insertedMessage] = await promisePool.query(
+    'SELECT * FROM message WHERE id = ?',
+    [result.insertId]
+  );
+
+  const [insertedMessageTable] = await promisePool.query(
+    'SELECT * FROM message_table WHERE message_id = ?',
+    [result.insertId]
+  );
+  insertedMessage[0].toMessage = insertedMessageTable[0].to_message_id;
+
+  return {
+    result: result,
+    message: insertedMessage[0],
+  };
 };
 
-export { listForumPosts, insertMessage };
+export {listForumPosts, insertMessage};
