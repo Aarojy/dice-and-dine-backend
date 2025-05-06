@@ -1,4 +1,5 @@
 import express from 'express';
+import {authenticateToken} from '../../middlewares.js';
 import {
   getMenu,
   getMenuItem,
@@ -21,11 +22,17 @@ infoRouter.route('/menu/item/:id').get(getMenuItem);
 
 infoRouter.route('/allergens/:lang').get(getAllergens);
 
-infoRouter.route('/restaurant/phone/:number').post(postRestaurantNumber);
+infoRouter
+  .route('/restaurant/phone/:number')
+  .post(authenticateToken, postRestaurantNumber);
 
-infoRouter.route('/restaurant/email/:email').post(postRestaurantEmail);
+infoRouter
+  .route('/restaurant/email/:email')
+  .post(authenticateToken, postRestaurantEmail);
 
-infoRouter.route('/restaurant/open/:open').post(postRestaurantOpen);
+infoRouter
+  .route('/restaurant/open/:open')
+  .post(authenticateToken, postRestaurantOpen);
 
 infoRouter.route('/restaurant/:lang').get(getRestaurant);
 
