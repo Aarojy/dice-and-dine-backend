@@ -35,7 +35,7 @@ export const postMessage = async (req, res) => {
       return;
     }
   }
-  res.status(201).json({message: 'Message posted successfully'});
+  res.status(201).json({message: 'Message posted successfully', txt: message});
 };
 
 export default {getAllMessages, postMessage};
