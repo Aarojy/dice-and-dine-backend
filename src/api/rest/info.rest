@@ -25,13 +25,17 @@ GET http://localhost:3000/api/v1/info/getPublicTransport
 
 
 ### Change restaurant phone
-POST http://localhost:3000/api/v1/info/restaurant/phone/10123456786
+POST http://localhost:3000/api/v1/info/restaurant/phone/10123456784
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsInVzZXJuYW1lIjoiYWRtaW4iLCJ1c2VyX3R5cGUiOiJhZG1pbiIsImlhdCI6MTc0NjUxOTE0NCwiZXhwIjoxNzQ2NjA1NTQ0fQ.7xyN9uw4cAdcIiYoOe-tCEOZsNY7lpFh9OnQwNCpXTg
 
 ### Change restaurant email
-POST http://localhost:3000/api/v1/info/restaurant/email/demo@metropolia.com
+POST http://localhost:3000/api/v1/info/restaurant/email/demo@gmail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsInVzZXJuYW1lIjoiYWRtaW4iLCJ1c2VyX3R5cGUiOiJhZG1pbiIsImlhdCI6MTc0NjUxOTE0NCwiZXhwIjoxNzQ2NjA1NTQ0fQ.7xyN9uw4cAdcIiYoOe-tCEOZsNY7lpFh9OnQwNCpXTg
 
 ### Change restaurant open times
-POST http://localhost:3000/api/v1/info/restaurant/open/9am-10pm
+POST http://localhost:3000/api/v1/info/restaurant/open/9am-9pm
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsInVzZXJuYW1lIjoiYWRtaW4iLCJ1c2VyX3R5cGUiOiJhZG1pbiIsImlhdCI6MTc0NjUxOTE0NCwiZXhwIjoxNzQ2NjA1NTQ0fQ.7xyN9uw4cAdcIiYoOe-tCEOZsNY7lpFh9OnQwNCpXTg
+
 
 10123456789
 9am-9pm

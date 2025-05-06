@@ -63,6 +63,10 @@ const postRestaurantNumber = async (req, res) => {
   try {
     const {number} = req.params;
 
+    if (req.user.user_type !== 'admin') {
+      return res.status(403).json({message: 'Unauthorized'});
+    }
+
     if (!number) {
       return res.status(400).json({error: 'Invalid phone number'});
     }
@@ -79,6 +83,10 @@ const postRestaurantEmail = async (req, res) => {
   try {
     const {email} = req.params;
 
+    if (req.user.user_type !== 'admin') {
+      return res.status(403).json({message: 'Unauthorized'});
+    }
+
     if (!email) {
       return res.status(400).json({error: 'Invalid email'});
     }
@@ -94,7 +102,10 @@ const postRestaurantEmail = async (req, res) => {
 const postRestaurantOpen = async (req, res) => {
   try {
     const {open} = req.params;
-    console.log(open);
+
+    if (req.user.user_type !== 'admin') {
+      return res.status(403).json({message: 'Unauthorized'});
+    }
 
     if (!open) {
       return res.status(400).json({error: 'Invalid open times'});
