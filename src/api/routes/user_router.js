@@ -5,6 +5,7 @@ import {
   getUserById,
   uploadProfileImage,
   putUser,
+  getUsers,
 } from '../controllers/user_controller.js';
 import {upload} from '../../utils/multer.js';
 import {authenticateToken} from '../../middlewares.js';
@@ -39,6 +40,8 @@ export const validateUserById = (req, res, next) => {
 
   next();
 };
+
+userRouter.get('/', authenticateToken, getUsers);
 
 /**
  * @api {post} /api/v1/users Add a New User
