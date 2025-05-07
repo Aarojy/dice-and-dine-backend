@@ -1,6 +1,22 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
+/**
+ * @module Middlewares
+ * @description Middleware functions for handling authentication.
+ */
+
+/**
+ * @function authenticateToken
+ * @description Middleware to authenticate a user based on a JWT token.
+ * @param {Object} req - The HTTP request object.
+ * @param {Object} req.headers - The headers of the request.
+ * @param {string} req.headers.authorization - The authorization header containing the JWT token.
+ * @param {Object} res - The HTTP response object.
+ * @param {Function} next - The next middleware function in the stack.
+ * @throws {Error} 401 Unauthorized if no token is provided.
+ * @throws {Error} 403 Forbidden if the token is invalid.
+ */
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
