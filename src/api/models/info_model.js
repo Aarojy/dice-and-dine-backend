@@ -9,6 +9,21 @@ const itemCategoriesTable = 'category_table';
 const gameCategories = 'game_categories';
 const gameCategoriesTable = 'game_category_table';
 
+/**
+ * @api {get} /api/v1/info/menu/:lang Get Menu
+ * @apiName GetMenu
+ * @apiGroup Info
+ *
+ * @apiParam {String} lang The language of the menu.
+ *
+ * @apiSuccess {Object[]} menu The list of menu items.
+ * @apiSuccess {String} menu.name The name of the menu item.
+ * @apiSuccess {Number} menu.price The price of the menu item.
+ * @apiSuccess {Object[]} menu.allergens The list of allergens for the menu item.
+ * @apiSuccess {Object[]} menu.categories The list of categories for the menu item.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the menu.
+ */
 const getMenuFromDatabase = async (lang) => {
   let result = [];
 
@@ -57,6 +72,22 @@ const getMenuFromDatabase = async (lang) => {
   return result;
 };
 
+/**
+ * @api {get} /api/v1/info/menu/item/:id Get Menu Item
+ * @apiName GetMenuItem
+ * @apiGroup Info
+ *
+ * @apiParam {Number} id The ID of the menu item.
+ *
+ * @apiSuccess {Object} menuItem The details of the menu item.
+ * @apiSuccess {String} menuItem.name The name of the menu item.
+ * @apiSuccess {Number} menuItem.price The price of the menu item.
+ * @apiSuccess {Object[]} menuItem.allergens The list of allergens for the menu item.
+ * @apiSuccess {Object[]} menuItem.categories The list of categories for the menu item.
+ *
+ * @apiError (404 Not Found) MenuItemNotFound The menu item was not found.
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the menu item.
+ */
 const getMenuItemFromDatabase = async (id) => {
   const [rows] = await promisePool.query(
     `SELECT * FROM ${menu} WHERE id=${id}`
@@ -103,6 +134,18 @@ const getMenuItemFromDatabase = async (id) => {
   return row;
 };
 
+/**
+ * @api {get} /api/v1/info/allergens/:lang Get Allergens
+ * @apiName GetAllergens
+ * @apiGroup Info
+ *
+ * @apiParam {String} lang The language of the allergens.
+ *
+ * @apiSuccess {Object[]} allergens The list of allergens.
+ * @apiSuccess {String} allergens.name The name of the allergen.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the allergens.
+ */
 const getAllergensFromDatabase = async (lang) => {
   const [rows] = await promisePool.query(
     `SELECT * FROM ${allergens} WHERE lang="${lang}"`
@@ -110,6 +153,19 @@ const getAllergensFromDatabase = async (lang) => {
   return rows;
 };
 
+/**
+ * @api {get} /api/v1/info/restaurant/:lang Get Restaurant Info
+ * @apiName GetRestaurant
+ * @apiGroup Info
+ *
+ * @apiParam {String} lang The language of the restaurant information.
+ *
+ * @apiSuccess {Object} restaurant The restaurant information.
+ * @apiSuccess {String} restaurant.name The name of the restaurant.
+ * @apiSuccess {String} restaurant.address The address of the restaurant.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the restaurant information.
+ */
 const getRestaurantFromDatabase = async (lang) => {
   const [rows] = await promisePool.query(
     `SELECT * FROM ${restaurant} WHERE lang="${lang}"`
@@ -117,6 +173,18 @@ const getRestaurantFromDatabase = async (lang) => {
   return rows;
 };
 
+/**
+ * @api {put} /api/v1/info/restaurant Update Restaurant Info
+ * @apiName UpdateRestaurantInfo
+ * @apiGroup Info
+ *
+ * @apiBody {String} info The new information to update.
+ * @apiBody {String} type The type of information to update (e.g., phone, email, open_times).
+ *
+ * @apiSuccess {String} message Success message indicating the restaurant info was updated.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while updating the restaurant info.
+ */
 const changeRestaurantInfo = async (info, type) => {
   await promisePool.query(
     `UPDATE restaurant_info
@@ -125,6 +193,19 @@ const changeRestaurantInfo = async (info, type) => {
   return;
 };
 
+/**
+ * @api {get} /api/v1/info/boardgames/:lang Get Boardgames
+ * @apiName GetBoardgames
+ * @apiGroup Info
+ *
+ * @apiParam {String} lang The language of the boardgames.
+ *
+ * @apiSuccess {Object[]} boardgames The list of boardgames.
+ * @apiSuccess {String} boardgames.name The name of the boardgame.
+ * @apiSuccess {Object[]} boardgames.categories The list of categories for the boardgame.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the boardgames.
+ */
 const getBoardgamesFromDatabase = async (lang) => {
   let result = [];
 
@@ -154,6 +235,18 @@ const getBoardgamesFromDatabase = async (lang) => {
   return rows;
 };
 
+/**
+ * @api {get} /api/v1/info/item-categories/:lang Get Item Categories
+ * @apiName GetItemCategories
+ * @apiGroup Info
+ *
+ * @apiParam {String} lang The language of the item categories.
+ *
+ * @apiSuccess {Object[]} itemCategories The list of item categories.
+ * @apiSuccess {String} itemCategories.name The name of the item category.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the item categories.
+ */
 const getItemCategoriesFromDatabase = async (lang) => {
   const [rows] = await promisePool.query(
     `SELECT * FROM ${itemCategories} WHERE lang="${lang}"`
@@ -161,6 +254,18 @@ const getItemCategoriesFromDatabase = async (lang) => {
   return rows;
 };
 
+/**
+ * @api {get} /api/v1/info/game-categories/:lang Get Game Categories
+ * @apiName GetGameCategories
+ * @apiGroup Info
+ *
+ * @apiParam {String} lang The language of the game categories.
+ *
+ * @apiSuccess {Object[]} gameCategories The list of game categories.
+ * @apiSuccess {String} gameCategories.name The name of the game category.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the game categories.
+ */
 const getGameCategoriesFromDatabase = async (lang) => {
   const [rows] = await promisePool.query(
     `SELECT * FROM ${gameCategories} WHERE lang="${lang}"`
@@ -168,6 +273,17 @@ const getGameCategoriesFromDatabase = async (lang) => {
   return rows;
 };
 
+/**
+ * @api {get} /api/v1/info/public-transport Get Public Transport Data
+ * @apiName GetPublicTransport
+ * @apiGroup Info
+ *
+ * @apiSuccess {Object} transportData The public transport data.
+ * @apiSuccess {Object[]} transportData.scooters The list of nearby scooters.
+ * @apiSuccess {Object[]} transportData.stops The list of nearby stops.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching public transport data.
+ */
 const fetchPublicTransport = async () => {
   try {
     const restaurantData = await getRestaurantFromDatabase('fi');

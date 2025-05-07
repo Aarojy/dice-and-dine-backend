@@ -1,6 +1,19 @@
 import promisePool from '../../utils/database.js';
 import {findUserById} from './user_model.js';
 
+/**
+ * @api {get} /api/v1/orders Get All Orders
+ * @apiName GetOrders
+ * @apiGroup Orders
+ *
+ * @apiSuccess {Object[]} orders List of all orders.
+ * @apiSuccess {Number} orders.id The unique ID of the order.
+ * @apiSuccess {Object} orders.customer The details of the customer (excluding password and user type).
+ * @apiSuccess {Object[]} orders.order The list of items in the order.
+ * @apiSuccess {Object} orders.order.menu_item The details of the menu item.
+ *
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the orders.
+ */
 const listOrders = async () => {
   const [rows] = await promisePool.query('SELECT * FROM food_orders');
 
@@ -34,6 +47,21 @@ const listOrders = async () => {
   return rows;
 };
 
+/**
+ * @api {get} /api/v1/orders/:id Get Order by ID
+ * @apiName GetOrderById
+ * @apiGroup Orders
+ *
+ * @apiParam {Number} id The unique ID of the order.
+ *
+ * @apiSuccess {Object} order The details of the order.
+ * @apiSuccess {Object} order.customer The details of the customer (excluding password and user type).
+ * @apiSuccess {Object[]} order.order The list of items in the order.
+ * @apiSuccess {Object} order.order.menu_item The details of the menu item.
+ *
+ * @apiError (404 Not Found) OrderNotFound The order was not found.
+ * @apiError (500 Internal Server Error) InternalServerError An error occurred while fetching the order.
+ */
 const orderById = async (id) => {
   const [rows] = await promisePool.query(
     'SELECT customer, `order`, time FROM food_orders WHERE `order` = ?',
@@ -79,6 +107,23 @@ const subOrderById = async (id) => {
   return rows;
 };
 
+/**
+ * @api {post} /api/v1/orders Create a New Order
+ * @apiName CreateOrder
+ * @apiGroup Orders
+ *
+ * @apiBody {Object[]} order The list of items in the order.
+ * @apiBody {Number} order.item_id The ID of the menu item.
+ * @apiBody {Number} order.quantity The quantity of the menu item.
+ *
+ * @apiHeader {String} Authorization Bearer token for authentication.
+ *
+ * @apiSuccess {String} message Success message indicating the order was created.
+ * @apiSuccess {Number} order_id The unique ID of the created order.
+ *
+ * @apiError (400 Bad Request) MissingFields Missing required fields.
+ * @apiError (500 Internal Server Error) FailedToCreate Failed to create the order.
+ */
 const createOrder = async (user_id, order) => {
   const time = new Date();
   let maxOrderId = null;
@@ -113,6 +158,20 @@ const createOrder = async (user_id, order) => {
   };
 };
 
+/**
+ * @api {put} /api/v1/orders/:id Update Order Status
+ * @apiName EditOrderStatus
+ * @apiGroup Orders
+ *
+ * @apiParam {Number} id The unique ID of the order.
+ *
+ * @apiBody {String} status The new status of the order.
+ *
+ * @apiSuccess {String} message Success message indicating the order status was updated.
+ *
+ * @apiError (404 Not Found) OrderNotFound The order was not found.
+ * @apiError (500 Internal Server Error) FailedToUpdate Failed to update the order status.
+ */
 const editOrderStatus = async (order_id, status) => {
   try {
     const [rows] = await promisePool.query(
@@ -129,6 +188,18 @@ const editOrderStatus = async (order_id, status) => {
   }
 };
 
+/**
+ * @api {delete} /api/v1/menu-items/:id Delete Menu Item
+ * @apiName RemoveMenuItem
+ * @apiGroup Menu
+ *
+ * @apiParam {Number} id The unique ID of the menu item.
+ *
+ * @apiSuccess {String} message Success message indicating the menu item was deleted.
+ *
+ * @apiError (404 Not Found) MenuItemNotFound The menu item was not found.
+ * @apiError (500 Internal Server Error) FailedToDelete Failed to delete the menu item.
+ */
 const removeMenuItem = async (id) => {
   try {
     const [rows] = await promisePool.query('DELETE FROM `menu` WHERE id = ?', [
@@ -153,6 +224,22 @@ const removeMenuItem = async (id) => {
   }
 };
 
+/**
+ * @api {post} /api/v1/menu-items Add Menu Item
+ * @apiName AddMenuItem
+ * @apiGroup Menu
+ *
+ * @apiBody {String} name The name of the menu item.
+ * @apiBody {Number} price The price of the menu item.
+ * @apiBody {String} description The description of the menu item.
+ * @apiBody {String} lang The language of the menu item.
+ * @apiBody {Number[]} allergens The list of allergen IDs associated with the menu item.
+ * @apiBody {Number[]} categories The list of category IDs associated with the menu item.
+ *
+ * @apiSuccess {String} message Success message indicating the menu item was added.
+ *
+ * @apiError (500 Internal Server Error) FailedToAdd Failed to add the menu item.
+ */
 const addMenuItem = async (menu_item) => {
   try {
     const [rows] = await promisePool.query(
