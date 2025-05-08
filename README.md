@@ -107,7 +107,7 @@ dice-and-dine-backend/
 
 For detailed information on available endpoints, request/response formats, and usage examples, check out the full API documentation:
 
-👉 [Dice & Dine API Docs]((https://users.metropolia.fi/~aarojy/root/project-apidocs/))
+👉 [Dice & Dine API Docs](https://users.metropolia.fi/~aarojy/root/project-apidocs/)
 
 
 ---
